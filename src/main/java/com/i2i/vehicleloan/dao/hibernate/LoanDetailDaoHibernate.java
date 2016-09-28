@@ -22,7 +22,7 @@ import com.i2i.vehicleloan.model.LoanDetail;
 @Repository("loanDetailDao")
 @Transactional
 public class LoanDetailDaoHibernate extends GenericDaoHibernate<LoanDetail, Long> implements LoanDetailDao {
-
+    
     /**
      * Constructor that sets the entity to User.class.
      */
@@ -37,8 +37,6 @@ public class LoanDetailDaoHibernate extends GenericDaoHibernate<LoanDetail, Long
      *     Its object from service method.It contains the loan detail of user.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public void addLoanDetail(LoanDetail loanDetail) throws DatabaseException {
         Session session = getSession();
@@ -56,8 +54,6 @@ public class LoanDetailDaoHibernate extends GenericDaoHibernate<LoanDetail, Long
      *     It return list of loan object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file. 
      */
     public List<LoanDetail> retrieveLoanDetails() throws DatabaseException {
         Session session = getSession();
@@ -77,9 +73,7 @@ public class LoanDetailDaoHibernate extends GenericDaoHibernate<LoanDetail, Long
      * @return
      *     It return retrieve list of loan detail object to service method.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
+     *     It handle all the custom exception in vehicle loan application.  
      */
     public List<LoanDetail> retrieveLoanDetailsByLoanId(int loanId) throws DatabaseException {
         Session session = getSession();
@@ -100,8 +94,6 @@ public class LoanDetailDaoHibernate extends GenericDaoHibernate<LoanDetail, Long
      *     It return retrieve list of loan detail object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file. 
      */
     public List<LoanDetail> retrieveLoanDetailByUserId(int userId) throws DatabaseException {
         Session session = getSession();

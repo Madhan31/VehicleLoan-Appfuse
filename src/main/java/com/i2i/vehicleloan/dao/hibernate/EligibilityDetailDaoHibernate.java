@@ -30,16 +30,14 @@ public class EligibilityDetailDaoHibernate extends GenericDaoHibernate<Eligibili
     }    
     
     /**
-	 * To insert a eligibility details into table using session.
-	 * 
+     * To insert a eligibility details into table using session.
+     * 
      * @param eligibilityDetail
      * 		Its a object from service method.
      * @return
      * 		Returns true or false to service method.
      * @throws ApplicationException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public boolean insertEligibilityDetail(EligibilityDetail eligibilityDetail) throws DatabaseException {
         try {
@@ -51,16 +49,14 @@ public class EligibilityDetailDaoHibernate extends GenericDaoHibernate<Eligibili
     }    
     
     /**
-	 * To retrieve all the eligibility detail by using user ID.
-	 *  
+     * To retrieve all the eligibility detail by using user ID.
+     *  
      * @param eligibilityDetail
      * 		Its a value from service method.
      * @return
      * 		Returns list of object to service method.
      * @throws ApplicationException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
+     *     It handle all the custom exception in vehicle loan application. 
      */
     public List<EligibilityDetail> retrieveEligibilityDetailsByUserId(int userId) throws DatabaseException {
         try {
@@ -80,8 +76,6 @@ public class EligibilityDetailDaoHibernate extends GenericDaoHibernate<Eligibili
      *     It return a object to service method
      * @throws ApplicationException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public EligibilityDetail retrieveEligibilityDetail(int vehicleModelId) throws DatabaseException {
         try {

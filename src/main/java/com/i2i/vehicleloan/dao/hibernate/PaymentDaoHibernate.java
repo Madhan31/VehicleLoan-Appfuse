@@ -8,7 +8,6 @@ import org.hibernate.HibernateException;
 import org.springframework.stereotype.Repository;
 
 import com.i2i.vehicleloan.dao.PaymentDao;
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.Payment;
 
@@ -37,8 +36,6 @@ public class PaymentDaoHibernate extends GenericDaoHibernate<Payment, Long> impl
      *     Its object from service method.It contains the payment detail of user.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public void addPayment(Payment payment) throws DatabaseException {
         try {
@@ -57,8 +54,6 @@ public class PaymentDaoHibernate extends GenericDaoHibernate<Payment, Long> impl
      *     It return retrieve of payment detail object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public Payment retrievePayment(int paymentId) throws DatabaseException {
         try {
@@ -76,7 +71,7 @@ public class PaymentDaoHibernate extends GenericDaoHibernate<Payment, Long> impl
      *     Get user id from service to fetchn all the loan detail want to retrieve. 
      * @return
      *     It return list of loan object to service method.
-     * @throws ApplicationException
+     * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
      */
     public List<Payment> retrievePaymentsByLoanId(int loanId) throws DatabaseException {

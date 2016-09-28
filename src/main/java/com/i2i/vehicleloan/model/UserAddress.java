@@ -46,93 +46,93 @@ public class UserAddress {
     @JoinColumn(name = "user_id")
     private User user;
     
-	/**
-	 * Constructor which has arguments is used to create address object.
-	 * 
-	 * @param addressId
-	 * 		Contains unique id for address.
-	 * @param street
-	 * 		It contains street name.
-	 * @param city
-	 * 		It contains city name of an user.
-	 * @param state
-	 * 		Contains state name of an user.
-	 * @param pincode
-	 * 		Contains pincode of an user.
-	 * @param landmark
-	 * 		It contains landmark name of an user.
-	 */
+    /**
+     * Constructor which has arguments is used to create address object.
+     * 
+     * @param addressId
+     * 		Contains unique id for address.
+     * @param street
+     * 		It contains street name.
+     * @param city
+     * 		It contains city name of an user.
+     * @param state
+     * 		Contains state name of an user.
+     * @param pincode
+     * 		Contains pincode of an user.
+     * @param landmark
+     * 		It contains landmark name of an user.
+     */
     public UserAddress(int addressId, String street, String city, String state, int pincode, String landmark) {
-		super();
-		this.addressId = addressId;
-		this.street = street;
-		this.city = city;
-		this.state = state;
-		this.pincode = pincode;
-		this.landmark = landmark;
-	}
+        super();
+        this.addressId = addressId;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.pincode = pincode;
+        this.landmark = landmark;
+    }
     
     public UserAddress() { }    
     
-	public int getAddressId() {
-		return addressId;
-	}
+    public int getAddressId() {
+        return addressId;
+    }
 
-	public void setAddressId(int addressId) {
-		this.addressId = addressId;
-	}
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
 
-	public String getStreet() {
-		return street;
-	}
+    public String getStreet() {
+        return street;
+    }
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public String getCity() {
+        return city;
+    }
     
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 	
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	public int getPincode() {
-		return pincode;
-	}
+    public int getPincode() {
+        return pincode;
+    }
 
-	public void setPincode(int pincode) {
-		this.pincode = pincode;
-	}
+    public void setPincode(int pincode) {
+        this.pincode = pincode;
+    }
 
-	public String getLandmark() {
-		return landmark;
-	}
+    public String getLandmark() {
+        return landmark;
+    }
 
-	public void setLandmark(String landmark) {
-		this.landmark = landmark;
-	}
-    
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setLandmark(String landmark) {
+        this.landmark = landmark;
+    }
+   
+    public void setUser(User user) {
+        this.user = user;
+    }
 	
-	@Override
-	public String toString() {
-		return "Address [addressId=" + addressId + ", street=" + street + ", city=" + city + ", state=" + state
-				+ ", pincode=" + pincode + ", landmark=" + landmark + "]";
-	}
+    @Override
+    public String toString() {
+        return "Address [addressId=" + addressId + ", street=" + street + ", city=" + city + ", state=" + state
+                + ", pincode=" + pincode + ", landmark=" + landmark + "]";
+    }
 }

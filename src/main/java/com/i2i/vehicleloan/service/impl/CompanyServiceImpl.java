@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.i2i.vehicleloan.dao.CompanyDao;
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.Company;
 import com.i2i.vehicleloan.service.CompanyService;
@@ -25,26 +24,24 @@ import com.i2i.vehicleloan.util.ValidationUtil;
 @Service("companyService")
 public class CompanyServiceImpl extends GenericManagerImpl<Company, Long> implements CompanyService {
 
-    CompanyDao companyDao;
+    private CompanyDao companyDao;
     
     @Autowired
     public CompanyServiceImpl(CompanyDao companyDao) {
         this.companyDao = companyDao;
     }
-	
+    
     /**
      * Retrieve all the company details from database to controller method
      * 
      * @return 
      *     It returns list object to controller method.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
+     *     It handle all the custom exception in vehicle loan application. 
      */
     public List<Company> retrieveCompanies() throws DatabaseException {
-        return companyDao.retrieveCompanies();		
-    }	
+        return companyDao.retrieveCompanies();        
+    }    
     
     /**
      * Call company dao for add the new company detail.
@@ -54,12 +51,10 @@ public class CompanyServiceImpl extends GenericManagerImpl<Company, Long> implem
      * @return 
      *     Its return notification message to controller.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
+     *     It handle all the custom exception in vehicle loan application.    
      */
     public String addCompany(Company company) throws DatabaseException {
-    	companyDao.addCompany(company);
+        companyDao.addCompany(company);
         return "Company details added successfully";
     }
     
@@ -71,9 +66,7 @@ public class CompanyServiceImpl extends GenericManagerImpl<Company, Long> implem
      * @return 
      *     Its return notification message to controller.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
+     *     It handle all the custom exception in vehicle loan application.    
      */
     public String removeCompany(int companyId) throws DatabaseException {
         if (!ValidationUtil.isNumeric(String.valueOf(companyId))) {

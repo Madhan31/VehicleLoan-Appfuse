@@ -3,13 +3,12 @@ package com.i2i.vehicleloan.service;
 import javax.jws.WebService;
 import javax.ws.rs.Path;
 
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.LoanDetail;
 
 /**
  * <p>
- * Loan detail service class which has methods for adding, retrieve loan detail details.
+ * Loan detail service interface which has methods for adding, retrieve loan detail details.
  * It contain all the business logic operation of loan detail class.
  * </p> 
  * 
@@ -28,8 +27,6 @@ public interface LoanDetailService {
      *     Get loan detail object from controller. 
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.     
      */
     void addLoanDetail(LoanDetail loanDetail) throws DatabaseException;
     
@@ -42,8 +39,6 @@ public interface LoanDetailService {
      *     Return the object of retrieve exist loan detail to controller.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */
     LoanDetail retrieveLatestLoanDetail() throws DatabaseException;
     
@@ -56,8 +51,6 @@ public interface LoanDetailService {
      *     Return the object of retrieve exist loan detail to controller.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */
     public LoanDetail retrieveLoanDetailByLoanId(int loanId) throws DatabaseException;
     
@@ -70,8 +63,6 @@ public interface LoanDetailService {
      *     It return list of object to controller method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
      */
     public LoanDetail retrieveLoanDetailByUserId(int userId)throws DatabaseException;
 }

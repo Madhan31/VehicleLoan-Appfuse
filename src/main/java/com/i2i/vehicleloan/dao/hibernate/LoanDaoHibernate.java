@@ -22,7 +22,7 @@ import com.i2i.vehicleloan.model.Loan;
 @Repository("loanDao")
 @Transactional
 public class LoanDaoHibernate extends GenericDaoHibernate<Loan, Long> implements LoanDao {
-	
+    
     /**
      * Constructor that sets the entity to User.class.
      */
@@ -37,8 +37,6 @@ public class LoanDaoHibernate extends GenericDaoHibernate<Loan, Long> implements
      *     Its object from service method.It contains the loan detail of user.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */
     public void addLoan(Loan loan) throws DatabaseException {
         try {
@@ -55,8 +53,6 @@ public class LoanDaoHibernate extends GenericDaoHibernate<Loan, Long> implements
      *     Get loan id from service to fetch the particular loan detail want to remove. 
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public void removeLoan(int loanId) throws DatabaseException {
         try {
@@ -77,8 +73,6 @@ public class LoanDaoHibernate extends GenericDaoHibernate<Loan, Long> implements
      *    It return loan object to service.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public Loan retrieveLoan(int loanId) throws DatabaseException {
         try {
@@ -98,8 +92,6 @@ public class LoanDaoHibernate extends GenericDaoHibernate<Loan, Long> implements
      *     It return list of loan object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public List<Loan> retrieveLoansByUserId(int userId) throws DatabaseException {
         try {
@@ -117,8 +109,6 @@ public class LoanDaoHibernate extends GenericDaoHibernate<Loan, Long> implements
      *     It return list of loan object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public List<Loan> retreieveAllLoans() throws DatabaseException {
         try {
@@ -138,8 +128,6 @@ public class LoanDaoHibernate extends GenericDaoHibernate<Loan, Long> implements
      *     It return a object to service method
      * @throws ApplicationException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public Loan retrieveLoanByEligibilityDetailId(int eligibilityDetailId) throws DatabaseException {
         try {

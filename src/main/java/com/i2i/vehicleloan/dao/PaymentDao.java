@@ -2,12 +2,11 @@ package com.i2i.vehicleloan.dao;
 
 import java.util.List;
 
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.Payment;
 
 /**
- * Dao class which has methods for adding, retrieving user payment detail into database.
+ * PaymentDao interface which has methods for adding, retrieving user payment detail into database.
  * 
  * @author vicky
  *
@@ -22,8 +21,6 @@ public interface PaymentDao extends GenericDao<Payment, Long> {
      *     Its object from service method.It contains the payment detail of user.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     void addPayment(Payment payment) throws DatabaseException;
     
@@ -36,8 +33,6 @@ public interface PaymentDao extends GenericDao<Payment, Long> {
      *     It return retrieve of payment detail object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     Payment retrievePayment(int paymentId) throws DatabaseException;
     
@@ -48,7 +43,7 @@ public interface PaymentDao extends GenericDao<Payment, Long> {
      *     Get user id from service to fetchn all the loan detail want to retrieve. 
      * @return
      *     It return list of loan object to service method.
-     * @throws ApplicationException
+     * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
      */
     List<Payment> retrievePaymentsByLoanId(int loanId) throws DatabaseException;    

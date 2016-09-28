@@ -44,8 +44,8 @@ import com.i2i.vehicleloan.service.VehicleService;
  */
 @Controller
 public class UserController {
-	
-	private UserManager userManager = null;	
+    
+    private UserManager userManager = null;    
     private VehicleService vehicleService = null;    
     private CompanyService companyService = null;    
     private LoanDetailService loanDetailService = null;
@@ -53,7 +53,6 @@ public class UserController {
     private EligibilityDetailService eligibilityDetailService = null;
     private LoanService loanService = null;
     private UserAddressService userAddressService = null;
-    
 
     @Autowired
     public void setUserManager(UserManager userManager) {
@@ -117,55 +116,55 @@ public class UserController {
         return "userOperation";
     }     
 
-	/**
-	 * String eligibilityDetail() redirects to jsp page when corresponding url is called as mapped below. 
-	 * @return
-	 * 		Returns jsp file name.
-	 */        
+    /**
+     * String eligibilityDetail() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *         Returns jsp file name.
+     */        
     @RequestMapping("/homePage")     
     public String eligibilityDetail(ModelMap modelMap, HttpSession session) {
-    	try {
-    	    modelMap.addAttribute("eligibilityDetail", new EligibilityDetail());
-    	    modelMap.addAttribute("vehicleList", vehicleService.retrieveVehicles());
-    	    modelMap.addAttribute("companyList", companyService.retrieveCompanies());    		
-    	    //modelMap.addAttribute("loanDetail", loanDetailService.retrieveLoanDetailByUserId((int)session.getAttribute("userId")));
-    		return "homePage";
-    	} catch (DatabaseException exp) {
-    		modelMap.addAttribute("message", (exp.getMessage().toString()));
-    		return "homePage";
-    	} 
-    }	
+        try {
+            modelMap.addAttribute("eligibilityDetail", new EligibilityDetail());
+            modelMap.addAttribute("vehicleList", vehicleService.retrieveVehicles());
+            modelMap.addAttribute("companyList", companyService.retrieveCompanies());            
+            //modelMap.addAttribute("loanDetail", loanDetailService.retrieveLoanDetailByUserId((int)session.getAttribute("userId")));
+            return "homePage";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "homePage";
+        } 
+    }    
     
-	/**
-	 * ModelAndView vehicleModelView() gets vehicle id through jsp and redirects to jsp page when corresponding url is called as mapped below. 
-	 * @return
-	 * 		Returns jsp file name.
-	 */    
+    /**
+     * ModelAndView vehicleModelView() gets vehicle id through jsp and redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *         Returns jsp file name.
+     */    
     @RequestMapping(value = "/vehicleModelView", method = RequestMethod.GET)     
     public String vehicleModelView(@RequestParam("vehicleId") int vehicleId, ModelMap modelMap) {
-    	try {
-    		modelMap.addAttribute("vehicleModelList", vehicleModelService.getVehicleModelsByVehicleId(vehicleId));
-    		return "vehicleModelView";
-    	} catch (DatabaseException exp) {
-    		modelMap.addAttribute("message", (exp.getMessage().toString()));
-    		return "homePage";
-    	}
+        try {
+            modelMap.addAttribute("vehicleModelList", vehicleModelService.getVehicleModelsByVehicleId(vehicleId));
+            return "vehicleModelView";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "homePage";
+        }
     }
     
-	/**
-	 * ModelAndView vehicleModelPrice() gets vehicle Model Id through jsp and redirects to jsp page when corresponding url is called as mapped below. 
-	 * @return
-	 * 		Returns jsp file name.
-	 */    
+    /**
+     * ModelAndView vehicleModelPrice() gets vehicle Model Id through jsp and redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *         Returns jsp file name.
+     */    
     @RequestMapping(value = "/vehicleModelPrice", method = RequestMethod.GET)     
     public String vehicleModelPrice(@RequestParam("vehicleModelId") int vehicleModelId, ModelMap modelMap) {
-    	try {
-    		modelMap.addAttribute("vehicleModel", vehicleModelService.getVehicleModelById(vehicleModelId));
-    		return "vehicleModelPrice";
-    	} catch (DatabaseException exp) {
-    		modelMap.addAttribute("message", exp.getMessage());
-    		return "homePage";
-    	}
+        try {
+            modelMap.addAttribute("vehicleModel", vehicleModelService.getVehicleModelById(vehicleModelId));
+            return "vehicleModelPrice";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", exp.getMessage());
+            return "homePage";
+        }
     }    
     
     /**

@@ -2,7 +2,6 @@ package com.i2i.vehicleloan.service;
 
 import java.util.List;
 
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.VehicleModel;
 
@@ -22,27 +21,23 @@ public interface VehicleModelService extends GenericManager<VehicleModel, Long> 
      * Call vehicle dao for add new vehicle detail.
      *
      * @param vehicle
-	 *     Get the vehicle object from controller.
+     *     Get the vehicle object from controller.
      * @return
      *     Its return notification message to controller.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
-     */	
+     */    
     void saveVehicleModel(VehicleModel vehicleModel) throws DatabaseException;
     
     /**
      * Call vehicle dao for remove vehicle detail.
      * 
      * @param vehicleId
-	 *     Get vehicle id from controller to remove detail of specified vehicle. 
+     *     Get vehicle id from controller to remove detail of specified vehicle. 
      * @return
      *     Its return notification message to controller.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.       
+     *     It handle all the custom exception in vehicle loan application.  
      */    
     void removeVehicleModel(int userId) throws DatabaseException;
     
@@ -53,8 +48,6 @@ public interface VehicleModelService extends GenericManager<VehicleModel, Long> 
      *     It return list of vehicle object to controller.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
      */     
     List<VehicleModel> retrieveAllVehicleModel() throws DatabaseException;
     
@@ -66,23 +59,19 @@ public interface VehicleModelService extends GenericManager<VehicleModel, Long> 
      * @return
      *     It return list of vehicle model object to controller.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
+     *     It handle all the custom exception in vehicle loan application. 
      */
-	public List<VehicleModel> getVehicleModelsByVehicleId(int vehicleId) throws DatabaseException;
-	
-	/**
-	 * Retrieve particular vehicle model detail by vehicle id.
-	 * 
-	 * @param vehicleModelId
+    public List<VehicleModel> getVehicleModelsByVehicleId(int vehicleId) throws DatabaseException;
+    
+    /**
+     * Retrieve particular vehicle model detail by vehicle id.
+     * 
+     * @param vehicleModelId
      *     Get vehicle id from controller for retrieve a vehicle model detail.  
-	 * @return
-	 *     It return a retrieve vehicle model object to controller.
-	 * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
-	 */
-	public VehicleModel getVehicleModelById(int vehicleModelId) throws DatabaseException;
+     * @return
+     *     It return a retrieve vehicle model object to controller.
+     * @throws DatabaseException
+     *     It handle all the custom exception in vehicle loan application.   
+     */
+    public VehicleModel getVehicleModelById(int vehicleModelId) throws DatabaseException;
 }

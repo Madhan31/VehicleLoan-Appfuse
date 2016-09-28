@@ -16,7 +16,7 @@ import com.i2i.vehicleloan.model.Vehicle;
 /**
  * Vehicle model pojo class which has setter and getter methods for accessing vehicle model details.
  * 
- * @author admin-pc
+ * @author madhan
  *
  */
 @Entity
@@ -56,13 +56,13 @@ public class VehicleModel {
      * @param vehicle
      *     Contains object of class vehicle.
      */
-	public VehicleModel(int vehicleModelId, String vehicleModelName, int price, Vehicle vehicle) {
-		super();
-		this.vehicleModelId = vehicleModelId;
-		this.vehicleModelName = vehicleModelName;
-		this.price = price;
-		this.vehicle = vehicle;
-	}  
+    public VehicleModel(int vehicleModelId, String vehicleModelName, int price, Vehicle vehicle) {
+        super();
+        this.vehicleModelId = vehicleModelId;
+        this.vehicleModelName = vehicleModelName;
+        this.price = price;
+        this.vehicle = vehicle;
+    }  
    
     public int getVehicleModelId() {
         return vehicleModelId;
@@ -88,20 +88,20 @@ public class VehicleModel {
         this.vehicle = vehicle;
     }
 
-	public int getPrice() {
-		return price;
-	}
+    public int getPrice() {
+        return price;
+    }
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
 
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
 }
    

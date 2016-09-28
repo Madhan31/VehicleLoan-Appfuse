@@ -10,7 +10,6 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.stereotype.Repository;
 
 import com.i2i.vehicleloan.dao.VehicleModelDao;
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.VehicleModel;
 
@@ -24,11 +23,11 @@ import com.i2i.vehicleloan.model.VehicleModel;
 @Repository("vehicleModelDao")
 @Transactional
 public class VehicleModelDaoHibernate extends GenericDaoHibernate<VehicleModel, Long> implements VehicleModelDao {
-	
+    
     /**
      * Constructor that sets the entity to Vehicle.class.
      */
-	public VehicleModelDaoHibernate() {
+    public VehicleModelDaoHibernate() {
         super(VehicleModel.class);
     }
     
@@ -39,17 +38,15 @@ public class VehicleModelDaoHibernate extends GenericDaoHibernate<VehicleModel, 
      *     Its object from service method.It contains the vehicle detail of user.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
-     */		
+     */        
     public void saveVehicleModel(VehicleModel vehicleModel) throws DatabaseException {
-    	try {
+        try {
             getSession().save(vehicleModel);
-    	} catch (HibernateException exp) {
-    		throw new DatabaseException("Error occured in add vehicle model");
-    	}
+        } catch (HibernateException exp) {
+            throw new DatabaseException("Error occured in add vehicle model");
+        }
     }
-	
+    
     /**
      * To remove the vehicle detail from database by using session.
      * 
@@ -57,37 +54,33 @@ public class VehicleModelDaoHibernate extends GenericDaoHibernate<VehicleModel, 
      *     Get vehicle id from service to fetch the vehicle detail want to remove.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */       
-	public void removeVehicleModel(int vehicleModelId) throws DatabaseException {
-		try {
-			VehicleModel vehicleModel = (VehicleModel) getSession().load(VehicleModel.class, vehicleModelId);
-		    getSession().delete(vehicleModel);
-		} catch (HibernateException exp) {
-    		throw new DatabaseException("Error occured in remove vehicle model");
-    	}
-	}
-	
+    public void removeVehicleModel(int vehicleModelId) throws DatabaseException {
+        try {
+            VehicleModel vehicleModel = (VehicleModel) getSession().load(VehicleModel.class, vehicleModelId);
+            getSession().delete(vehicleModel);
+        } catch (HibernateException exp) {
+            throw new DatabaseException("Error occured in remove vehicle model");
+        }
+    }
+    
     /**
      * Retrieve all vehicles from database and returns to service method. 
      * 
      * @return
-     * 	   Returns vehicle list to service method.
+     *        Returns vehicle list to service method.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
-     */ 	
-	public List<VehicleModel> retrieveAllVehicleModel() throws DatabaseException {
+     *     It handle all the custom exception in vehicle loan application. 
+     */     
+    public List<VehicleModel> retrieveAllVehicleModel() throws DatabaseException {
         try {
             List<VehicleModel> vehicleModels = getSession().createQuery("from VehicleModel").list();
             return vehicleModels;
         } catch (HibernateException exp) {
             throw new DatabaseException("Oops...Cant retrieve models Kindly check your input and try again...\n", exp);
         }
-	}
-	
+    }
+    
     /**
      * Retrieve vehicle model detail from database and returns to service method.
      *  
@@ -97,17 +90,15 @@ public class VehicleModelDaoHibernate extends GenericDaoHibernate<VehicleModel, 
      *     It return the vehicle model object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
      */
     public VehicleModel getVehicleModelById(int vehicleModelId) throws DatabaseException {
         try {
-        	Session session = getSession();;
+            Session session = getSession();;
             VehicleModel vehicleModel = (VehicleModel)session.get(VehicleModel.class, vehicleModelId);
             return vehicleModel;
         } catch (HibernateException exp) {
             throw new DatabaseException("Oops...Cant retrieve vehicelModel Kindly check your input and try again...", exp);
-        }	
+        }    
     }    
     
     /**
@@ -119,17 +110,14 @@ public class VehicleModelDaoHibernate extends GenericDaoHibernate<VehicleModel, 
      *     It return retrieve list of vehicle detail object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file. 
      */
     public List<VehicleModel> getVehicleModelsByVehicleId(int vehicleId) throws DatabaseException {
         try {
-        	Session session = getSession();
+            Session session = getSession();
             List<VehicleModel> vehicleModels = session.createQuery("from VehicleModel where vehicle_id = "+vehicleId).list();
             return vehicleModels;
         } catch (HibernateException exp) {
             throw new DatabaseException("Oops...Cant retrieve vehicelModel Kindly check your input and try again...\n", exp);
         }
-    }	
-
+    }    
 }

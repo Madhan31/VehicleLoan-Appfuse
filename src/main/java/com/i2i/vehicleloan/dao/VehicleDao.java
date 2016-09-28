@@ -2,19 +2,18 @@ package com.i2i.vehicleloan.dao;
 
 import java.util.List;
 
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.Vehicle;
 
 /**
- * Dao class which has methods for adding, removing, retrieving vehicle detail into database.
+ * VehicleDao inteface which has methods for adding, removing, retrieving vehicle detail into database.
  * 
  * @author madhan
  *
  * @since 2016-09-06
  */
 public interface VehicleDao extends GenericDao<Vehicle, Long> {
-	
+    
     /**
      * Retrieve all vehicles from database and returns to service method. 
      * 
@@ -22,8 +21,6 @@ public interface VehicleDao extends GenericDao<Vehicle, Long> {
      * 	   Returns vehicle list to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */
     List<Vehicle> retrieveVehicles() throws DatabaseException;
     
@@ -34,8 +31,6 @@ public interface VehicleDao extends GenericDao<Vehicle, Long> {
      *     Its object from service method.It contains the vehicle detail of user.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     void addVehicle(Vehicle vehicle) throws DatabaseException;
     
@@ -46,8 +41,6 @@ public interface VehicleDao extends GenericDao<Vehicle, Long> {
      *     Get vehicle id from service to fetch the vehicle detail want to remove.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     void removeVehicle(int vehicleId) throws DatabaseException;
-}
+}   

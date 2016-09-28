@@ -1,17 +1,15 @@
 package com.i2i.vehicleloan.exception;
 
 /**
- * Exception class which has constructors for creating own error messages.
+ * DatabaseException class which has constructors for creating own error messages.
  * 
  * @author Madhan
  * 
  * @created 2016-08-27
  */
 public class DatabaseException extends Exception {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
     
     /**
      * Constructor with single parameter which has message. 

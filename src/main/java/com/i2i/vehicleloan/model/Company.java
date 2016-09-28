@@ -17,46 +17,45 @@ import javax.persistence.Table;
 @Table(name = "company_detail")
 public class Company {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "company_id")
-	private int companyId;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "company_id")
+    private int companyId;
 	
-	@Column(name = "company_name")
-	private String companyName;
+    @Column(name = "company_name")
+    private String companyName;
     
-	/**
-	 * Constructor with no arguments is used to create an company object.
-	 */
-	public Company() {
-	}
+   	/**
+     * Constructor with no arguments is used to create an company object.
+     */
+    public Company() { }
 	
-	/**
-	 * Constructor which has arguments is used to create company object.
-	 * 
-	 * @param companyId
-	 *     Contains unique id for an company.
-	 * @param companyName
-	 *     Contains name of an company.
-	 */
-	public Company(int companyId, String companyName) {
-		this.companyId = companyId;
-		this.companyName = companyName;
-	}
+    /**
+     * Constructor which has arguments is used to create company object.
+     * 
+     * @param companyId
+     *     Contains unique id for an company.
+     * @param companyName
+     *     Contains name of an company.
+     */
+    public Company(int companyId, String companyName) {
+        this.companyId = companyId;
+        this.companyName = companyName;
+    }
 
-	public int getCompanyId() {
-		return companyId;
-	}
+    public int getCompanyId() {
+        return companyId;
+    }
 
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
-	}
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
 
-	public String getCompanyName() {
-		return companyName;
-	}
+    public String getCompanyName() {
+        return companyName;
+    }
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}	
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }	
 }

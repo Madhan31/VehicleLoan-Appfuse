@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.i2i.vehicleloan.model;
 
 import javax.persistence.CascadeType;
@@ -23,16 +20,16 @@ import javax.persistence.Table;
 @Table(name = "payment")
 public class Payment {
     
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "payment_id")
-	private int paymentId;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "payment_id")
+    private int paymentId;
 	
-	@Column(name = "payment_amount")
-	private int paymentAmount;
+    @Column(name = "payment_amount")
+    private int paymentAmount;
 	
-	@Column(name = "date")
-	private String date;
+    @Column(name = "date")
+    private String date;
 	
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "loan_id")
@@ -72,52 +69,52 @@ public class Payment {
         
     }    
     
-	public int getPaymentId() {
-		return paymentId;
-	}
+    public int getPaymentId() {
+        return paymentId;
+    }
 
-	public void setPaymentId(int paymentId) {
-		this.paymentId = paymentId;
-	}
+    public void setPaymentId(int paymentId) {
+        this.paymentId = paymentId;
+    }
 
-	public int getPaymentAmount() {
-		return paymentAmount;
-	}
+    public int getPaymentAmount() {
+        return paymentAmount;
+    }
 
-	public void setPaymentAmount(int paymentAmount) {
-		this.paymentAmount = paymentAmount;
-	}
+    public void setPaymentAmount(int paymentAmount) {
+        this.paymentAmount = paymentAmount;
+    }
 
-	public String getDate() {
-		return date;
-	}
+    public String getDate() {
+        return date;
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	public Loan getLoan() {
-		return loan;
-	}
+    public Loan getLoan() {
+        return loan;
+    }
 
-	public void setLoan(Loan loan) {
-		this.loan = loan;
-	}
+    public void setLoan(Loan loan) {
+        this.loan = loan;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
     
-	/**
-	 *Return object to string format. 
-	 */
-	@Override
-	public String toString() {
-		return "Payment [paymentId=" + paymentId + ", paymentAmount=" + paymentAmount + ", date=" + date + ", loan="
-				+ loan + "]";
-	}
+    /**
+     *Return object to string format. 
+     */
+    @Override
+    public String toString() {
+        return "Payment [paymentId=" + paymentId + ", paymentAmount=" + paymentAmount + ", date=" + date + ", loan="
+                + loan + "]";
+    }
 }

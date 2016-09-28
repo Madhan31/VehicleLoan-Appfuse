@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.i2i.vehicleloan.dao.EligibilityDetailDao;
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.EligibilityDetail;
 import com.i2i.vehicleloan.service.EligibilityDetailService;
@@ -24,9 +23,9 @@ import com.i2i.vehicleloan.util.ValidationUtil;
  */
 @Service("eligibilityDetailService")
 public class EligibilityDetailServiceImpl extends GenericManagerImpl<EligibilityDetail, Long> implements EligibilityDetailService {
-	
+    
     @Autowired
-    EligibilityDetailDao eligibilityDetailDao;
+    private EligibilityDetailDao eligibilityDetailDao;
 
     /**
      * Constructor that sets the entity to Vehicle.class.
@@ -37,18 +36,16 @@ public class EligibilityDetailServiceImpl extends GenericManagerImpl<Eligibility
     }
     
     public EligibilityDetailServiceImpl() { }
-	
+    
     /**
-	 * Calls eligibility dao methods to add eligibility details.
-	 *  
+     * Calls eligibility dao methods to add eligibility details.
+     *  
      * @param employee
-     * 		Its a object from controller method
+     *         Its a object from controller method
      * @return
-     * 		Returns true or false to controller method.
+     *         Returns true or false to controller method.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
+     *     It handle all the custom exception in vehicle loan application.  
      */   
     public boolean addEligibilityDetail(EligibilityDetail eligibilityDetail) throws DatabaseException {
         if (!ValidationUtil.isNumeric(String.valueOf(eligibilityDetail.getSalary()))) {
@@ -67,16 +64,14 @@ public class EligibilityDetailServiceImpl extends GenericManagerImpl<Eligibility
     }
     
     /**
-	 * Calls eligibility dao methods to retrieve eligibility details.
-	 *  
+     * Calls eligibility dao methods to retrieve eligibility details.
+     *  
      * @param employee
-     * 		Its a object from controller method
+     *         Its a object from controller method
      * @return
-     * 		Returns true or false to controller method.
+     *         Returns true or false to controller method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */   
     public List<EligibilityDetail> retrieveEligibilityDetailsByUserId(int userId) throws DatabaseException {
         return eligibilityDetailDao.retrieveEligibilityDetailsByUserId(userId);
@@ -91,13 +86,11 @@ public class EligibilityDetailServiceImpl extends GenericManagerImpl<Eligibility
      *     It return true or false to the vehicle model service.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */
     public boolean isVehicleModelExist(int vehicleModelId) throws DatabaseException {
-    	//if (loanService.isLoanExistByEligibilityDetailId(eligibilityDetailDao.retrieveEligibilityDetail(vehicleModelId).getId())) {
-    	    return true;
-    	//}
-    	//return false;
+        //if (loanService.isLoanExistByEligibilityDetailId(eligibilityDetailDao.retrieveEligibilityDetail(vehicleModelId).getId())) {
+            return true;
+        //}
+        //return false;
     }
 }

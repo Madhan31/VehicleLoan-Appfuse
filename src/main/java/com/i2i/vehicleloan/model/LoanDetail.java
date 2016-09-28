@@ -17,7 +17,7 @@ import com.i2i.vehicleloan.model.Payment;
 /**
  * Loan detail pojo class which has setter and getter methods for accessing loan detail details.
  * 
- * @author vicky
+ * @author madhan
  *
  */
 @Entity
@@ -66,8 +66,8 @@ public class LoanDetail {
      *     Contains payment object of an class payment.
      */
     public LoanDetail(int balanceAmount, int balanceEmi, Loan loan, Payment payment, User user) {
-    	this.payment = payment;
-    	this.loan = loan;
+        this.payment = payment;
+        this.loan = loan;
         this.balanceAmount = balanceAmount;
         this.balanceEmi = balanceEmi;
         this.user = user;
@@ -75,7 +75,7 @@ public class LoanDetail {
     
     /**
      * Constructor with argument is used to create loan detail object.
-	 * @param balanceAmount
+     * @param balanceAmount
      *     Contains balance amount of customer to be paided.
      * @param balanceEmi
      *     Contains remaining number of installment period.
@@ -83,16 +83,16 @@ public class LoanDetail {
      *     Contains loan object of an class loan.
      * @param payment
      *     Contains payment object of an class payment.
-	 */
-	public LoanDetail(int balanceAmount, int balanceEmi, User user) {
-		this.balanceAmount = balanceAmount;
-		this.balanceEmi = balanceEmi;
-		this.user = user;
-	}
-
-	public int getLoanDetailId() {
-        return loanDetailId;
+     */
+    public LoanDetail(int balanceAmount, int balanceEmi, User user) {
+        this.balanceAmount = balanceAmount;
+        this.balanceEmi = balanceEmi;
+        this.user = user;
     }
+
+    public int getLoanDetailId() {
+        return loanDetailId;
+    }   
    
     public int getBalanceAmount() {
         return balanceAmount;
@@ -114,12 +114,12 @@ public class LoanDetail {
     * Return object into string format
     */
     @Override
-	public String toString() {
-		return "LoanDetail [loanDetailId=" + loanDetailId + ", balanceAmount=" + balanceAmount + ", balanceEmi="
-				+ balanceEmi + ", loan=" + loan + ", payment=" + payment + "]";
-	}
+    public String toString() {
+        return "LoanDetail [loanDetailId=" + loanDetailId + ", balanceAmount=" + balanceAmount + ", balanceEmi="
+                + balanceEmi + ", loan=" + loan + ", payment=" + payment + "]";
+    }
 
-	public void setLoanName(int balanceAmount) {
+    public void setLoanName(int balanceAmount) {
         this.balanceAmount = balanceAmount;
     }
     
@@ -131,16 +131,16 @@ public class LoanDetail {
         this.payment = payment;
     }
 
-	public Loan getLoan() {
-		return loan;
-	}
+    public Loan getLoan() {
+        return loan;
+    }
 
-	public void setLoan(Loan loan) {
-		this.loan = loan;
-	}
+    public void setLoan(Loan loan) {
+        this.loan = loan;
+    }
 
-	public void setBalanceAmount(int balanceAmount) {
-		this.balanceAmount = balanceAmount;
-	}
+    public void setBalanceAmount(int balanceAmount) {
+        this.balanceAmount = balanceAmount;
+    }
 }
    

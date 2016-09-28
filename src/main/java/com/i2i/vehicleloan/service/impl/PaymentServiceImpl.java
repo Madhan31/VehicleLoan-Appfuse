@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.i2i.vehicleloan.dao.PaymentDao;
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.Loan;
 import com.i2i.vehicleloan.model.LoanDetail;
@@ -45,23 +44,21 @@ public class PaymentServiceImpl extends GenericManagerImpl<Payment, Long> implem
     }
     
     public PaymentServiceImpl() { }   
-	
-	/**
-     * Call payment dao for add new payment detail.
-     * 
-	 * @param payment
-	 *     Get the payment object from controller.
-	 * @return
-     *     Its return notification message to controller.
-	 * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
-	 */
-	public String addPayment(Payment payment) throws DatabaseException {
+       
+    /**
+      * Call payment dao for add new payment detail.
+      * 
+      * @param payment
+      *     Get the payment object from controller.
+      * @return
+      *     Its return notification message to controller.
+      * @throws DatabaseException
+      *     It handle all the custom exception in vehicle loan application.   
+      */
+    public String addPayment(Payment payment) throws DatabaseException {
         if (!ValidationUtil.isNumeric(String.valueOf(payment.getLoan().getLoanId()))) {
             throw new DatabaseException("Kindly Enter valid number...");
-        } 	    
+        }            
         if (!ValidationUtil.isNumeric(String.valueOf(payment.getPaymentAmount()))) {
             throw new DatabaseException("Kindly Enter only numbers...");
         }         
@@ -79,32 +76,30 @@ public class PaymentServiceImpl extends GenericManagerImpl<Payment, Long> implem
         loanDetailService.addLoanDetail(new LoanDetail(balanceAmount, balanceEmi, loan, payment, loan.getUser()));
         return "Successfully paided";
     }
-	
-	/**
-     * Call loan detail dao for retrieve particular loan detail.
-     * 
-	 * @param paymentId
-	 *     Get payment id from controller for retrieve particular payment detail.
-	 * @return
-	 *     It return the payment object to controller.   
-	 * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.     
-	 */
-	public Payment retrievePayment(int paymentId) throws DatabaseException {
+       
+    /**
+      * Call loan detail dao for retrieve particular loan detail.
+      * 
+      * @param paymentId
+      *     Get payment id from controller for retrieve particular payment detail.
+      * @return
+      *     It return the payment object to controller.   
+      * @throws DatabaseException
+      *     It handle all the custom exception in vehicle loan application.     
+      */
+    public Payment retrievePayment(int paymentId) throws DatabaseException {
         return paymentDao.retrievePayment(paymentId);
     }
-	
-	/**
-     * Call payment dao for retrieve particular payment detail.
-     * 
-	 * @return
-	 *     It return the payment object to controller.   
-	 * @throws ApplicationException
-     *     It handle all the custom exception in vehicle loan application.
-	 */
-	public List<Payment> retrievePaymentsByLoanId(int loanId) throws DatabaseException {
+       
+    /**
+      * Call payment dao for retrieve particular payment detail.
+      * 
+      * @return
+      *     It return the payment object to controller.   
+      * @throws DatabaseException
+      *     It handle all the custom exception in vehicle loan application.
+      */
+    public List<Payment> retrievePaymentsByLoanId(int loanId) throws DatabaseException {
         return paymentDao.retrievePaymentsByLoanId(loanId);
-    }	
+    }       
 }

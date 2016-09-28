@@ -6,9 +6,9 @@ import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.Company;
 
 /**
- * Dao class which has methods for adding, retrieve, remove company details in database.
+ * CompanyDao interface which has methods for adding, retrieve, remove company details in database.
  * 
- * @author vicky
+ * @author madhan
  *
  * @since 2016-09-06
  */
@@ -21,8 +21,6 @@ public interface CompanyDao extends GenericDao<Company, Long> {
      * 		Returns company list to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     List<Company> retrieveCompanies() throws DatabaseException;
     
@@ -33,8 +31,6 @@ public interface CompanyDao extends GenericDao<Company, Long> {
      *     Its object from service method.It contains company detail.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     void addCompany(Company company) throws DatabaseException;
     
@@ -45,8 +41,6 @@ public interface CompanyDao extends GenericDao<Company, Long> {
      *     Get company id from service to fetch the particular comapny detail want to remove. 
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     void removeCompany(int companyId) throws DatabaseException;
 }

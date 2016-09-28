@@ -7,7 +7,7 @@ import com.i2i.vehicleloan.model.Company;
 import com.i2i.vehicleloan.model.LoanDetail;
 
 /**
- * Dao class which has methods for adding, retrieving user loan detail into database.
+ * LoanDetailDao interface which has methods for adding, retrieving user loan detail into database.
  * 
  * @author admin-pc
  *
@@ -22,8 +22,6 @@ public interface LoanDetailDao extends GenericDao<LoanDetail, Long> {
      *     Its object from service method.It contains the loan detail of user.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public void addLoanDetail(LoanDetail loanDetail) throws DatabaseException;
     
@@ -34,8 +32,6 @@ public interface LoanDetailDao extends GenericDao<LoanDetail, Long> {
      *     It return list of loan object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file. 
      */
     public List<LoanDetail> retrieveLoanDetails() throws DatabaseException;
     
@@ -48,8 +44,6 @@ public interface LoanDetailDao extends GenericDao<LoanDetail, Long> {
      *     It return retrieve list of loan detail object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
      */
     public List<LoanDetail> retrieveLoanDetailsByLoanId(int loanId) throws DatabaseException;
     
@@ -62,8 +56,6 @@ public interface LoanDetailDao extends GenericDao<LoanDetail, Long> {
      *     It return retrieve list of loan detail object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file. 
      */
     public List<LoanDetail> retrieveLoanDetailByUserId(int userId) throws DatabaseException;
 }

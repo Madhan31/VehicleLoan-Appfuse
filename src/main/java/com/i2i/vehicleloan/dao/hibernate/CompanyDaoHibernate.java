@@ -22,14 +22,14 @@ import com.i2i.vehicleloan.model.Company;
 @Repository("companyDao")
 @Transactional
 public class CompanyDaoHibernate extends GenericDaoHibernate<Company, Long> implements CompanyDao {
-	
+    
     /**
-     * Constructor that sets the entity to User.class.
+     * Constructor that sets the entity to Company.class.
      */
     public CompanyDaoHibernate() {
         super(Company.class);
     }	
-	
+    
     /**
      * Retrieve all company details from database and returns to service method. 
      * 
@@ -37,8 +37,6 @@ public class CompanyDaoHibernate extends GenericDaoHibernate<Company, Long> impl
      * 		Returns company list to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public List<Company> retrieveCompanies() throws DatabaseException {
         Session session = getSession();
@@ -57,12 +55,10 @@ public class CompanyDaoHibernate extends GenericDaoHibernate<Company, Long> impl
      *     Its object from service method.It contains company detail.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public void addCompany(Company company) throws DatabaseException {
         try {
-        	getSession().save(company);
+            getSession().save(company);
         } catch (HibernateException exp) {
             throw new DatabaseException("Error occured in add the values in company", exp);
         } 
@@ -75,8 +71,6 @@ public class CompanyDaoHibernate extends GenericDaoHibernate<Company, Long> impl
      *     Get company id from service to fetch the particular comapny detail want to remove. 
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public void removeCompany(int companyId) throws DatabaseException {    	
         Session session = getSession();

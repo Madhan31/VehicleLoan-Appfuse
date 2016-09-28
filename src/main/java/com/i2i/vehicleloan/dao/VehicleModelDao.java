@@ -2,11 +2,10 @@ package com.i2i.vehicleloan.dao;
 
 import java.util.List;
 
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.VehicleModel;
 /**
- * Dao class which has methods for adding, removing, retrieving vehicle Model detail into database.
+ * VehicleModelDao interface which has methods for adding, removing, retrieving vehicle Model detail into database.
  * 
  * @author madhan
  *
@@ -21,8 +20,6 @@ public interface VehicleModelDao extends GenericDao<VehicleModel, Long> {
      *     Its object from service method.It contains the vehicle detail of user.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */	
     void saveVehicleModel(VehicleModel vehicleModel) throws DatabaseException;
     
@@ -33,8 +30,6 @@ public interface VehicleModelDao extends GenericDao<VehicleModel, Long> {
      *     Get vehicle id from service to fetch the vehicle detail want to remove.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */    
     void removeVehicleModel(int vehicleModelId) throws DatabaseException;
     
@@ -44,9 +39,7 @@ public interface VehicleModelDao extends GenericDao<VehicleModel, Long> {
      * @return
      * 	   Returns vehicle list to service method.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
+     *     It handle all the custom exception in vehicle loan application. 
      */    
     List<VehicleModel> retrieveAllVehicleModel() throws DatabaseException;
     
@@ -59,8 +52,6 @@ public interface VehicleModelDao extends GenericDao<VehicleModel, Long> {
      *     It return the vehicle model object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
      */
     public VehicleModel getVehicleModelById(int vehicleModelId) throws DatabaseException; 
     
@@ -73,8 +64,6 @@ public interface VehicleModelDao extends GenericDao<VehicleModel, Long> {
      *     It return retrieve list of vehicle detail object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file. 
      */
     public List<VehicleModel> getVehicleModelsByVehicleId(int vehicleId) throws DatabaseException; 
 }

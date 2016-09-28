@@ -5,13 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.i2i.vehicleloan.dao.CompanyDao;
 import com.i2i.vehicleloan.dao.LoanDetailDao;
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.Company;
 import com.i2i.vehicleloan.model.LoanDetail;
-import com.i2i.vehicleloan.service.CompanyService;
 import com.i2i.vehicleloan.service.LoanDetailService;
 
 /**
@@ -20,14 +17,14 @@ import com.i2i.vehicleloan.service.LoanDetailService;
  * It contain all the business logic operation of loan detail class.
  * </p> 
  * 
- *  @author vicky
+ * @author vicky
  *
  * @since 2016-09-06
  */
 @Service("loanDetailService")
 public class LoanDetailServiceImpl extends GenericManagerImpl<Company, Long> implements LoanDetailService {
 
-    LoanDetailDao loanDetailDao;
+    private LoanDetailDao loanDetailDao;
     
     @Autowired
     public LoanDetailServiceImpl(LoanDetailDao loanDetailDao) {
@@ -40,12 +37,10 @@ public class LoanDetailServiceImpl extends GenericManagerImpl<Company, Long> imp
      * @param loanDetail
      *     Get loan detail object from controller. 
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.     
+     *     It handle all the custom exception in vehicle loan application.   
      */
     public void addLoanDetail(LoanDetail loanDetail) throws DatabaseException {
-    	loanDetailDao.addLoanDetail(loanDetail);
+        loanDetailDao.addLoanDetail(loanDetail);
     }
     
     /**
@@ -57,8 +52,6 @@ public class LoanDetailServiceImpl extends GenericManagerImpl<Company, Long> imp
      *     Return the object of retrieve exist loan detail to controller.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */
     public LoanDetail retrieveLatestLoanDetail() throws DatabaseException {
         return retrieveLatestLoanDetailFromList(loanDetailDao.retrieveLoanDetails());
@@ -73,12 +66,10 @@ public class LoanDetailServiceImpl extends GenericManagerImpl<Company, Long> imp
      *     Return the object of retrieve exist loan detail to controller.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */
     public LoanDetail retrieveLoanDetailByLoanId(int loanId) throws DatabaseException {
-    	return retrieveLatestLoanDetailFromList(loanDetailDao.retrieveLoanDetailsByLoanId(loanId));
-    }	  
+        return retrieveLatestLoanDetailFromList(loanDetailDao.retrieveLoanDetailsByLoanId(loanId));
+    }      
     
     /**
      * Retrieve all the loan details from database to controller method.
@@ -88,31 +79,29 @@ public class LoanDetailServiceImpl extends GenericManagerImpl<Company, Long> imp
      * @return
      *     It return list of object to controller method.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
+     *     It handle all the custom exception in vehicle loan application. 
      */
     public LoanDetail retrieveLoanDetailByUserId(int userId)throws DatabaseException {
-    	return retrieveLatestLoanDetailFromList(loanDetailDao.retrieveLoanDetailByUserId(userId));
+        return retrieveLatestLoanDetailFromList(loanDetailDao.retrieveLoanDetailByUserId(userId));
     }
     
     /**
      * This method retrieve final object from given list.
      * @param loanDetails
-     * 		Contains list of loan details. 
+     *         Contains list of loan details. 
      * @return
-     * 		Returns loan detail object.
+     *         Returns loan detail object.
      */
     private LoanDetail retrieveLatestLoanDetailFromList(List<LoanDetail> loanDetails) {
-    	int sizeCount = 1;
-    	int listSize = loanDetails.size();
+        int sizeCount = 1;
+        int listSize = loanDetails.size();
         for (LoanDetail loanDetail :loanDetails) {
-        	if (listSize == sizeCount) {
-        		return loanDetail;
-        	} else {
-        		sizeCount++;
-        	}
+            if (listSize == sizeCount) {
+                return loanDetail;
+            } else {
+                sizeCount++;
+            }
         }
-        return null;    	
+        return null;        
     }
 }

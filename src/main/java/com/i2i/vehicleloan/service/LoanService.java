@@ -9,7 +9,7 @@ import com.i2i.vehicleloan.model.VehicleModel;
 
 /**
  * <p>
- * Loan service class which has methods for adding, retrieve loan details.
+ * Loan service interface which has methods for adding, retrieve loan details.
  * It contain all the business logic operation of loan class.
  * </p> 
  * 
@@ -26,8 +26,6 @@ public interface LoanService extends GenericManager<Loan, Long> {
      *     Get loan object from controller. 
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */
     void addLoan(Loan loan) throws DatabaseException;
     
@@ -39,9 +37,7 @@ public interface LoanService extends GenericManager<Loan, Long> {
      * @return
      *    It return notification message to controller.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.     
+     *     It handle all the custom exception in vehicle loan application.    
      */
     String removeLoan(int loanId) throws DatabaseException;
     
@@ -53,9 +49,7 @@ public interface LoanService extends GenericManager<Loan, Long> {
      * @return
      *    It return notification message to controller.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
+     *     It handle all the custom exception in vehicle loan application.  
      */
     Loan retrieveLoan(int loanId) throws DatabaseException;
     
@@ -68,8 +62,6 @@ public interface LoanService extends GenericManager<Loan, Long> {
      *     It return list of object to controller method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
      */
     List<Loan> retrieveLoansByUserId(int userId) throws DatabaseException;
     
@@ -80,8 +72,6 @@ public interface LoanService extends GenericManager<Loan, Long> {
      *     It return list of object to controller method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
      */
     public List<Loan> retreiveAllLoans() throws DatabaseException;
     
@@ -93,9 +83,7 @@ public interface LoanService extends GenericManager<Loan, Long> {
      * @return
      *     It return true or false to service method.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
+     *     It handle all the custom exception in vehicle loan application.   
      */
     boolean isLoanExist(int loanId) throws DatabaseException;
     
@@ -108,8 +96,6 @@ public interface LoanService extends GenericManager<Loan, Long> {
      *     It return true or false to eligibility detail service.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     boolean isLoanExistByEligibilityDetailId(int eligibilityDetailId) throws DatabaseException;
     /**

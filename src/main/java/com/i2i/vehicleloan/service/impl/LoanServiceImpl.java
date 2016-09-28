@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.i2i.vehicleloan.dao.LoanDao;
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.EligibilityDetail;
 import com.i2i.vehicleloan.model.Loan;
@@ -27,7 +26,7 @@ import com.i2i.vehicleloan.service.LoanService;
 public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements LoanService {
 
     @Autowired
-    LoanDao loanDao;
+    private LoanDao loanDao;
 
     /**
      * Constructor that sets the entity to Vehicle.class.
@@ -46,8 +45,6 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      *     Get loan object from controller. 
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */
     public void addLoan(Loan loan) throws DatabaseException {
         loanDao.addLoan(loan);
@@ -61,9 +58,7 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      * @return
      *    It return notification message to controller.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.     
+     *     It handle all the custom exception in vehicle loan application.  
      */
     public String removeLoan(int loanId) throws DatabaseException {
         if (isLoanExist(loanId)) {
@@ -82,8 +77,6 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      *    It return notification message to controller.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
      */
     public Loan retrieveLoan(int loanId) throws DatabaseException {
         return loanDao.retrieveLoan(loanId);
@@ -97,9 +90,7 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      * @return
      *     It return list of object to controller method.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
+     *     It handle all the custom exception in vehicle loan application. 
      */
     public List<Loan> retrieveLoansByUserId(int userId) throws DatabaseException {
         return loanDao.retrieveLoansByUserId(userId);
@@ -112,8 +103,6 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      *     It return list of object to controller method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.   
      */
     public List<Loan> retreiveAllLoans() throws DatabaseException {
         return loanDao.retreieveAllLoans();
@@ -127,9 +116,7 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      * @return
      *     It return true or false to service method.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
+     *     It handle all the custom exception in vehicle loan application.   
      */
     public boolean isLoanExist(int loanId) throws DatabaseException {
         return (null != retrieveLoan(loanId));
@@ -144,8 +131,6 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      *     It return true or false to eligibility detail service.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     public boolean isLoanExistByEligibilityDetailId(int eligibilityDetailId) throws DatabaseException {
         return (null != loanDao.retrieveLoanByEligibilityDetailId(eligibilityDetailId));
@@ -161,7 +146,7 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      *     It return the value to controller.
      */
     public int calculateLoanAmount(EligibilityDetail eligibilityDetail,VehicleModel vehicleModel) {
-    	return (vehicleModel.getPrice() - eligibilityDetail.getDownPayment());
+        return (vehicleModel.getPrice() - eligibilityDetail.getDownPayment());
     }
     
     /**
@@ -175,16 +160,16 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      *     It return the value to controller.
      */
     public float getEmiDetails(int loanPeriod, int loanAmount) {
-    	if (loanPeriod == 12) {     // Here 12 indicates emi period 
-    		return (loanAmount + loanAmount * 10/100)/loanPeriod;
-    	}
-    	if (loanPeriod == 24) {
-    		return (loanAmount + loanAmount * 15/100)/loanPeriod;
-    	}
-    	if (loanPeriod == 36) {
-    		return (loanAmount + loanAmount * 18/100)/loanPeriod;
-    	}
-    	return 0;    	
+        if (loanPeriod == 12) {    // Here 12 indicates emi period 
+            return (loanAmount + loanAmount * 10/100)/loanPeriod;
+        }
+        if (loanPeriod == 24) {    // Here 24 indicates emi period
+            return (loanAmount + loanAmount * 15/100)/loanPeriod;
+        }
+        if (loanPeriod == 36) {    // Here 36 indicates emi period
+            return (loanAmount + loanAmount * 18/100)/loanPeriod;
+        }
+        return 0;        
     }
     
     /**
@@ -198,16 +183,16 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      *     It return the value to controller.
      */
     public float getProcessingFees(int loanPeriod, int loanAmount) {
-    	if (loanPeriod == 12) {
-    		return (loanAmount * 1/100);
-    	}
-    	if (loanPeriod == 24) {
-    		return (loanAmount * 2/100);
-    	}
-    	if (loanPeriod == 36) {
-    		return (loanAmount * 3/100);
-    	}
-    	return 0;    	
+        if (loanPeriod == 12) {    // Here 12 indicates emi period 
+            return (loanAmount * 1/100);
+        }
+        if (loanPeriod == 24) {    // Here 24 indicates emi period 
+            return (loanAmount * 2/100);
+        }
+        if (loanPeriod == 36) {    // Here 36 indicates emi period 
+            return (loanAmount * 3/100);
+        }
+        return 0;        
     }
     
     /**
@@ -221,15 +206,15 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      *     It return the value to controller.
      */
     public float getDocumentationCharges(int loanPeriod, int loanAmount) {
-    	if (loanPeriod == 12) {
-    		return (loanAmount * 3/100);
-    	}
-    	if (loanPeriod == 24) {
-    		return (loanAmount * 2/100);
-    	}
-    	if (loanPeriod == 36) {
-    		return (loanAmount * 1/100);
-    	}
-    	return 0;     	
+        if (loanPeriod == 12) {    // Here 12 indicates emi period 
+            return (loanAmount * 3/100);
+        }
+        if (loanPeriod == 24) {    // Here 24 indicates emi period 
+            return (loanAmount * 2/100);
+        }
+        if (loanPeriod == 36) {    // Here 36 indicates emi period 
+            return (loanAmount * 1/100);
+        }
+        return 0;         
     }    
 }

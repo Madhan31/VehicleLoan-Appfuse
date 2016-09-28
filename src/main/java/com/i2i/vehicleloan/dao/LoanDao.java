@@ -6,7 +6,7 @@ import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.Loan;
 
 /**
- * Dao class which has methods for adding, removing, retrieving user loan details into database.
+ * LoanDao interface which has methods for adding, removing, retrieving user loan details into database.
  * 
  * @author admin-pc
  *
@@ -21,8 +21,6 @@ public interface LoanDao extends GenericDao<Loan, Long> {
      *     Its object from service method.It contains the loan detail of user.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.  
      */
     void addLoan(Loan loan) throws DatabaseException;
     
@@ -33,8 +31,6 @@ public interface LoanDao extends GenericDao<Loan, Long> {
      *     Get loan id from service to fetch the particular loan detail want to remove. 
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     void removeLoan(int loanId) throws DatabaseException;
     
@@ -61,8 +57,6 @@ public interface LoanDao extends GenericDao<Loan, Long> {
      *     It return list of loan object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     List<Loan> retrieveLoansByUserId(int userId) throws DatabaseException;
     
@@ -73,8 +67,6 @@ public interface LoanDao extends GenericDao<Loan, Long> {
      *     It return list of loan object to service method.
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     List<Loan> retreieveAllLoans() throws DatabaseException;
     
@@ -87,8 +79,6 @@ public interface LoanDao extends GenericDao<Loan, Long> {
      *     It return a object to service method
      * @throws ApplicationException
      *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.
      */
     Loan retrieveLoanByEligibilityDetailId(int eligibilityDetailId) throws DatabaseException;
 }

@@ -2,17 +2,12 @@ package com.i2i.vehicleloan.service;
 
 import java.util.List;
 
-import javax.jws.WebService;
-import javax.ws.rs.Path;
-
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.Company;
-import com.i2i.vehicleloan.model.Vehicle;
 
 /**
  * <p>
- * Company service class which has methods for adding, removing, retrieve company details.
+ * CompanyService interface class which has methods for adding, removing, retrieve company details.
  * It contain all the business logic operation of company class.
  * </p>
  *    
@@ -28,9 +23,7 @@ public interface CompanyService extends GenericManager<Company, Long> {
      * @return 
      *     It returns list object to controller method.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
+     *     It handle all the custom exception in vehicle loan application.  
      */
     List<Company> retrieveCompanies() throws DatabaseException;
     
@@ -42,9 +35,7 @@ public interface CompanyService extends GenericManager<Company, Long> {
      * @return 
      *     Its return notification message to controller.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
+     *     It handle all the custom exception in vehicle loan application.    
      */
     String addCompany(Company company) throws DatabaseException;
     
@@ -56,9 +47,7 @@ public interface CompanyService extends GenericManager<Company, Long> {
      * @return 
      *     Its return notification message to controller.
      * @throws DatabaseException
-     *     It handle all the custom exception in vehicle loan application.
-     * @throws ConfigurationException
-     *     It handle all the error message in configuration file.    
+     *     It handle all the custom exception in vehicle loan application.  
      */
     String removeCompany(int companyId) throws DatabaseException;  
 }

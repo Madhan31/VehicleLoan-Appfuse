@@ -73,12 +73,12 @@ public class Vehicle {
         this.vehicleName = vehicleName;
     }
 
-	public Set<VehicleModel> getVehicleModels() {
-		return vehicleModels;
-	}
+    public Set<VehicleModel> getVehicleModels() {
+        return vehicleModels;
+    }
 
-	public void setVehicleModels(Set<VehicleModel> vehicleModels) {
-		this.vehicleModels = vehicleModels;
-	}
+    public void setVehicleModels(Set<VehicleModel> vehicleModels) {
+        this.vehicleModels = vehicleModels;
+    }
 }
    

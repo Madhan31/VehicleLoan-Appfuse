@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.Company;
 import com.i2i.vehicleloan.model.Loan;
@@ -75,16 +74,10 @@ public class AdminController {
         this.userAddressService = userAddressService;
     } 
 	
-    @RequestMapping("/insertVehicle")     
-    public String insertVehicle(ModelMap modelMap) {
-        modelMap.addAttribute("insertVehicle", new Vehicle());
-        return "addVehicle";
-    }
-    
     @Autowired
-        public void setUserManager(UserManager userManager) {
-            this.userManager = userManager;
-        }     
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
+    }     
     
     /**
      * String adminOperation() redirects to jsp page when corresponding url is called as mapped below. 
@@ -96,48 +89,79 @@ public class AdminController {
         return "adminOperation";
     }    
     
+    /**
+	 * String insertVehicle() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */  
+    @RequestMapping("/insertVehicle")     
+    public String insertVehicle(ModelMap modelMap) {
+        modelMap.addAttribute("insertVehicle", new Vehicle());
+        return "addVehicle";
+    }
+    
+    /**
+	 * ModelAndView addVehicleModel() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */    
     @RequestMapping("/addVehicle")
     public ModelAndView addVehicle(@ModelAttribute("insertVehicle") Vehicle vehicle, ModelMap modelMap) {
-    	try {
-    		vehicleService.addVehicle(vehicle);
-    		return new ModelAndView("addVehicle", "message", "Added successfully");
+        try {
+    	    vehicleService.addVehicle(vehicle);
+    	    return new ModelAndView("addVehicle", "message", "Added successfully");
     	} catch (DatabaseException exp) {
-    		return new ModelAndView("home", "message", (exp.getMessage().toString()));
+    	    return new ModelAndView("home", "message", (exp.getMessage().toString()));
         }
     }
     
+    /**
+	 * ModelAndView deleteVehicle() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */   
     @RequestMapping("/deleteVehicle")
     public String deleteVehicle() {
-    	return "removeVehicle";
+        return "removeVehicle";
     }
     
+    /**
+	 * ModelAndView removeVehicle() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */   
     @RequestMapping(value = "/removeVehicle", method = RequestMethod.GET)     
     public ModelAndView removeVehicle(@RequestParam("vehicleId") int vehicleId, ModelMap modelMap) {
     	try {
         	vehicleService.removeVehicle(vehicleId);  		
-    		return new ModelAndView("removeVehicle", "message", "Deleted successfully");
+        	return new ModelAndView("removeVehicle", "message", "Deleted successfully");
     	} catch (DatabaseException exp) {
-    		return new ModelAndView("removeVehicle", "message", (exp.getMessage().toString()));
+    	    return new ModelAndView("removeVehicle", "message", (exp.getMessage().toString()));
     	}    	
     } 
     
+    /**
+	 * ModelAndView retrieveAllVehicle() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */  
     @RequestMapping("/retrieveAllVehicle")     
     public String retrieveAllVehicles(ModelMap modelMap) {
-    	try {
+        try {
             List<Vehicle> vehicles = vehicleService.retrieveVehicles();
-        	modelMap.addAttribute("vehicles", vehicles);
-        	return "retrieveAllVehicle";
+            modelMap.addAttribute("vehicles", vehicles);
+            return "retrieveAllVehicle";
     	} catch (DatabaseException exp) {
-    		modelMap.addAttribute("message", (exp.getMessage().toString()));
-    		return "vehicleOperation";
+    	    modelMap.addAttribute("message", (exp.getMessage().toString()));
+    	    return "vehicleOperation";
     	}
     }
     
-    @RequestMapping("/vehicleModelOperation")
-	public String vehicleModelOperation() {
-		return "vehicleModelOperation";
-	}
-    
+    /**
+	 * ModelAndView insertVehicleModel() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */   
     @RequestMapping("/insertVehicleModel")     
     public String insertVehicleModel(ModelMap modelMap) {
     	try {
@@ -145,60 +169,95 @@ public class AdminController {
             modelMap.addAttribute("vehicleList", vehicleService.retrieveVehicles());
             return "addVehicleModel";
     	} catch (DatabaseException exp) {
-    		modelMap.addAttribute("message", (exp.getMessage().toString()));
-    		return "vehicleModelOperation";
+    	    modelMap.addAttribute("message", (exp.getMessage().toString()));
+    	    return "vehicleModelOperation";
     	}
     }
     
+    /**
+	 * ModelAndView addVehicleModel() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */    
     @RequestMapping("/addVehicleModel")
     public ModelAndView addVehicleModel(@ModelAttribute("insertVehicleModel") VehicleModel vehicleModel, ModelMap modelMap) {
-    	try {
-    		vehicleModelService.saveVehicleModel(vehicleModel);
-    		return new ModelAndView("addVehicleModel", "message", "Added successfully");
+        try {
+        	vehicleModelService.saveVehicleModel(vehicleModel);
+        	return new ModelAndView("addVehicleModel", "message", "Added successfully");
     	} catch (DatabaseException exp) {
-    		return new ModelAndView("home", "message", (exp.getMessage().toString()));
+        	return new ModelAndView("home", "message", (exp.getMessage().toString()));
         }
     }
     
+    /**
+	 * ModelAndView deleteVehicle() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */   
     @RequestMapping("/deleteVehicleModel")
     public String deleteVehicleModel() {
-    	return "removeVehicleModel";
+        return "removeVehicleModel";
     }
     
+    /**
+	 * ModelAndView removeVehicle() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */    
     @RequestMapping(value = "/removeVehicleModel", method = RequestMethod.GET)     
     public ModelAndView removeVehicleModel(@RequestParam("vehicleModelId") int vehicleModelId, ModelMap modelMap) {
-    	try {
-    		vehicleModelService.removeVehicleModel(vehicleModelId);  		
-    		return new ModelAndView("removeVehicleModel", "message", "Deleted successfully");
+        try {
+        	vehicleModelService.removeVehicleModel(vehicleModelId);  		
+        	return new ModelAndView("removeVehicleModel", "message", "Deleted successfully");
     	} catch (DatabaseException exp) {
-    		return new ModelAndView("removeVehicleModel", "message", (exp.getMessage().toString()));
+        	return new ModelAndView("removeVehicleModel", "message", (exp.getMessage().toString()));
     	}    	
     } 
     
+    /**
+	 * ModelAndView retrieveAllVehicle() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */   
     @RequestMapping("/retrieveAllVehicleModel")     
     public String retrieveAllVehicleModel(ModelMap modelMap) {
-    	try {
+        try {
             List<VehicleModel> vehicleModels = vehicleModelService.retrieveAllVehicleModel();
         	modelMap.addAttribute("vehicleModels", vehicleModels);
         	return "retrieveAllVehicleModel";
     	} catch (DatabaseException exp) {
-    		modelMap.addAttribute("message", (exp.getMessage().toString()));
+        	modelMap.addAttribute("message", (exp.getMessage().toString()));
     		return "vehicleOperation";
     	}
     }	
 	
+	/**
+	 * String admin() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */ 
 	@RequestMapping("/admin")     
     public String admin(ModelMap map) {
-    	map.addAttribute("user", new User());
+        map.addAttribute("user", new User());
         return "admin";
     } 
 	
+	/**
+	 * String loanDetail() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */
 	@RequestMapping("/loanDetail")
     public String loanDetail(ModelMap modelMap) {
         modelMap.addAttribute("users", userManager.getUsers());
         return "loanDetail";
     }
 	
+	/**
+	 * ModelAndView payment() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */   
 	@RequestMapping("/payment")
     public String payment(@RequestParam("userId") int userId, ModelMap modelMap) {
     	try {
@@ -213,38 +272,67 @@ public class AdminController {
     	}     	
     }
 	
+	/**
+	 * String contact() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */ 
 	@RequestMapping("/contact") 
     public String contact() {
-		System.out.println("contact");
         return "contact";
     }
     
+    /**
+	 * String about() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */  
     @RequestMapping("/about") 
     public String about() {
         return "about";
     }
     
+    /**
+	 * String insertCompany() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */  
     @RequestMapping("/insertCompany")     
     public String insertCompany(ModelMap modelMap) {
         modelMap.addAttribute("insertCompany", new Company());
         return "addCompany";
     }
     
+    /**
+	 * ModelAndView addCompany() gets company details through jsp and redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */ 
     @RequestMapping("/addCompany")
     public ModelAndView addCompany(@ModelAttribute("insertCompany") Company company, ModelMap modelMap) {
-    	try {
-    		companyService.addCompany(company);
-    		return new ModelAndView("addCompany", "message", "Added successfully");
+        try {
+        	companyService.addCompany(company);
+        	return new ModelAndView("addCompany", "message", "Added successfully");
     	} catch (DatabaseException exp) {
-    		return new ModelAndView("home", "message", (exp.getMessage().toString()));
+        	return new ModelAndView("home", "message", (exp.getMessage().toString()));
         }
     }
     
+    /**
+	 * ModelAndView deleteCompany() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */  
     @RequestMapping("/deleteCompany")
     public String deleteCompany() {
-    	return "removeCompany";
+        return "removeCompany";
     }
     
+    /**
+	 * ModelAndView removeCompany() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */    
     @RequestMapping(value = "/removeCompany", method = RequestMethod.GET)     
     public ModelAndView removeCompany(@RequestParam("companyId") int companyId, ModelMap modelMap) {
     	try {
@@ -255,15 +343,20 @@ public class AdminController {
     	}    	
     } 
     
+    /**
+	 * ModelAndView retrieveAllCompany() redirects to jsp page when corresponding url is called as mapped below. 
+	 * @return
+	 * 		Returns jsp file name.
+	 */ 
     @RequestMapping("/retrieveAllCompany")     
     public String retrieveAllCompanies(ModelMap modelMap) {
-    	try {
+        try {
             List<Company> companies = companyService.retrieveCompanies();
         	modelMap.addAttribute("companies", companies);
         	return "retrieveAllCompany";
     	} catch (DatabaseException exp) {
-    		modelMap.addAttribute("message", (exp.getMessage().toString()));
-    		return "companyOperation";
+        	modelMap.addAttribute("message", (exp.getMessage().toString()));
+        	return "companyOperation";
     	}
     }    
 }
