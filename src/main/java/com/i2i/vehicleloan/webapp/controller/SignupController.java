@@ -16,6 +16,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +50,7 @@ public class SignupController extends BaseFormController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String onSubmit(final User user, final BindingResult errors, final HttpServletRequest request, final HttpServletResponse response)
+    public String onSubmit(final User user, ModelMap modelMap, final BindingResult errors, final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
         if (request.getParameter("cancel") != null) {
             return getCancelView();
@@ -79,7 +80,7 @@ public class SignupController extends BaseFormController {
         final String password = user.getPassword();
 
         try {
-            this.getUserManager().saveUser(user);
+            this.getUserManager().saveUser(user);        
         } catch (final AccessDeniedException ade) {
             // thrown by UserSecurityAdvice configured in aop:advisor userManagerSecurity
             log.warn(ade.getMessage());
@@ -114,7 +115,6 @@ public class SignupController extends BaseFormController {
         } catch (final MailException me) {
             saveError(request, me.getMostSpecificCause().getMessage());
         }
-
         return getSuccessView();
     }
 }

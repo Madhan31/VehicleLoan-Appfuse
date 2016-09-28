@@ -1,10 +1,9 @@
-<%@ include file="/common/taglibs.jsp" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <c:if test="${null == sessionScope['userId']}" >
-        <c:redirect url = "logIn" />
-    </c:if>
-    <head>
+  <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +15,7 @@
         <title>Insert title here</title>
     </head>
     <title>Add Vehicle</title>
-    <body>
+    <body style="padding-top:0px;">
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -28,7 +27,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="adminOperation">Home</a></li>
+        <li><a href="home">Home</a></li>
         <li class="dropdown" class = "active"><a class="dropdown-toggle"  data-toggle="dropdown" href="#">Vehicle Operation<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="#">Add Vehicle</a></li>
@@ -85,11 +84,11 @@
                  <div class = "panel-footer footer-align"><input type = "submit" name = "button" value = "Add" class="btn btn-info btn-lg pull-right col-sm-4 border input-align"/></div>
         </form:form>
         </div>
-    </body>
-    <c:if test="${message != null}" >
+        <c:if test="${message != null}" >
         <script language = "javaScript" type = "text/javascript">
             alert('<c:out value = "${message}" />');
             window.location.href = "insertVehicle";
         </script>
     </c:if>
+    </body>
 </html>

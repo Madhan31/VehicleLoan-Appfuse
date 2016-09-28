@@ -2,6 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 function loadvehiclemodels() {
@@ -47,15 +53,8 @@ function loadvehicleprice() {
 }
 </script> 
     <title>Eligibility Detail</title>
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
-
+<body style="padding-top:0px;">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -93,7 +92,7 @@ function loadvehicleprice() {
     	<div class="form-group">
     	<table>
     	<tr>
-        <td><form:input type = "text" name = "currentcity" path = "currentCity" placeholder = "Current City" required = "required" class="form-control"/><br></br></td>
+        <td><form:input type = "text" name = "currentcity" path = "currentCity" placeholder = "Current City" required = "required" class="form-control"/></td>
         </tr>
         <tr>         
         <td><form:select path = "company.companyId" required="required" class="form-control" style = "width: 300px; height: 40px;">        
@@ -104,7 +103,7 @@ function loadvehicleprice() {
 		 </form:select></td>
 		 </tr>
 		 <tr>         
-        <td><form:input type = "text" name = "salary" path = "salary" placeholder = "Salary per month" required = "required" class="form-control"/><br></br></td>
+        <td><form:input type = "text" name = "salary" path = "salary" placeholder = "Salary per month" required = "required" class="form-control"/></td>
         </tr>
         <tr>
         <td><select name = "vehicle" id = "vehicle" onChange="loadvehiclemodels();" required="required" class="form-control" style = "width: 300px; height: 40px;">
@@ -124,11 +123,9 @@ function loadvehicleprice() {
    	<td><div id = "vehicleModelPrice"></div></td>
    		 </tr>
    		 <tr>	      
-        <td><form:input type = "text" name = "downpayment" path = "downPayment" placeholder = "Down Payment" required = "required" class="form-control"/><br></br></td>
+        <td><form:input type = "text" name = "downpayment" path = "downPayment" placeholder = "Down Payment" required = "required" class="form-control"/></td>
         </tr>
-        <tr>
-        <td><form:input type = "hidden" path = "user.id" value = "${sessionScope['id']}" /></td>
-        </tr>
+
         </table>  
         </div>              
         <input type = "submit" name = "button" value = "Proceed" class="btn btn-info btn-lg pull-left col-sm-4 border input-align"/>

@@ -5,13 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.i2i.vehicleloan.dao.RoleDao;
 import com.i2i.vehicleloan.dao.VehicleDao;
 import com.i2i.vehicleloan.exception.ConfigurationException;
 import com.i2i.vehicleloan.exception.DatabaseException;
-import com.i2i.vehicleloan.model.Role;
 import com.i2i.vehicleloan.model.Vehicle;
-import com.i2i.vehicleloan.service.RoleManager;
 import com.i2i.vehicleloan.service.VehicleService;
 import com.i2i.vehicleloan.util.ValidationUtil;
 

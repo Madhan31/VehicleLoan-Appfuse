@@ -1,11 +1,12 @@
 <%@ include file="/common/taglibs.jsp" %>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <link rel="stylesheet" href="css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
@@ -43,18 +44,9 @@ function getDate()
     document.getElementById("todayDate").value = today;
 }
 
-</script>
-	<c:if test="${null == sessionScope['userId']}" >
-        <c:redirect url = "logIn" />
-    </c:if>    	
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</script>	
 </head>
-<body onload = "getDate();">
+<body onload = "getDate();" style="padding-top:0px;">
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -108,12 +100,7 @@ function getDate()
 	<tr>
 	<td><div id = "emiDetails"></div></td>
 	</tr>
-	<tr>	
-   	<td><form:input type = "hidden" path = "eligibilityDetail.id" value = "${eligibilityDetailId}" /></td>
-   	</tr>
-   	<tr>  
-   	<td><form:input type = "hidden" path = "user.userId" value = "${sessionScope['userId']}" /></td>
-   	</tr>
+
     </table>
     </div>  
     <input type = "submit" name = "button" value = "Apply Loan" class="btn btn-info btn-lg pull-right col-sm-4 border input-align"/>

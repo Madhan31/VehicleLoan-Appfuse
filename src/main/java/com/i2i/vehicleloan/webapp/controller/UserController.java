@@ -19,23 +19,28 @@ import com.i2i.vehicleloan.dao.SearchException;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.EligibilityDetail;
 import com.i2i.vehicleloan.model.Loan;
+import com.i2i.vehicleloan.model.LoanDetail;
+import com.i2i.vehicleloan.model.UserAddress;
 import com.i2i.vehicleloan.model.VehicleModel;
 import com.i2i.vehicleloan.service.CompanyService;
 import com.i2i.vehicleloan.service.EligibilityDetailService;
 import com.i2i.vehicleloan.service.LoanDetailService;
 import com.i2i.vehicleloan.service.LoanService;
+import com.i2i.vehicleloan.service.UserAddressService;
 import com.i2i.vehicleloan.service.UserManager;
 import com.i2i.vehicleloan.service.VehicleModelService;
 import com.i2i.vehicleloan.service.VehicleService;
 
 /**
- * Simple class to retrieve a list of users from the database.
- * <p/>
  * <p>
- * <a href="UserController.java.html"><i>View Source</i></a>
+ * LoanController class which has methods for adding, removing, etc., loan details and payment detail for an logged user.
+ * This class gets input like user name, contact, etc., from user through jsp page and calls corresponding loan service methods to add or update particular user details. 
+ * And it calls jsp pages for success or failure messages and also for exceptions.
  * </p>
- *
- * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
+ * 
+ * @author Madhan
+ * 
+ * @since 2016-09-06
  */
 @Controller
 public class UserController {
@@ -47,6 +52,7 @@ public class UserController {
     private VehicleModelService vehicleModelService = null;
     private EligibilityDetailService eligibilityDetailService = null;
     private LoanService loanService = null;
+    private UserAddressService userAddressService = null;
     
 
     @Autowired
@@ -82,7 +88,12 @@ public class UserController {
     @Autowired
     public void setLoanService(LoanService loanService) {
         this.loanService = loanService;
-    }    
+    } 
+    
+    @Autowired
+    public void setUserAddressService(UserAddressService userAddressService) {
+        this.userAddressService = userAddressService;
+    }     
     
     @RequestMapping("/admin/users*")
     public ModelAndView handleRequest(@RequestParam(required = false, value = "q") String query) throws Exception {
@@ -95,6 +106,16 @@ public class UserController {
         }
         return new ModelAndView("admin/userList", model.asMap());
     }
+    
+    /**
+     * String userOperation() redirects to jsp page when corresponding url is called as mapped below
+     * @return
+     *     Returns jsp file name.
+     */
+    @RequestMapping("/userOperation")
+    public String userOperation() {   
+        return "userOperation";
+    }     
 
 	/**
 	 * String eligibilityDetail() redirects to jsp page when corresponding url is called as mapped below. 
@@ -160,8 +181,7 @@ public class UserController {
     public ModelAndView addEligibilityDetail(@ModelAttribute("eligibilityDetail") EligibilityDetail eligibilityDetail, BindingResult bindingResult, ModelMap modelMap) {
         try {
             VehicleModel vechicleModel = vehicleModelService.getVehicleModelById(eligibilityDetail.getVehicleModel().getVehicleModelId()); 
-            if (eligibilityDetailService.addEligibilityDetail(eligibilityDetail)) {  
-                System.out.println("test");
+            if (eligibilityDetailService.addEligibilityDetail(eligibilityDetail)) {
                 modelMap.addAttribute("eligibilityDetailId", eligibilityDetail.getId());
                 modelMap.addAttribute("loan", new Loan());
                 return new ModelAndView("loan", "loanamount", loanService.calculateLoanAmount(eligibilityDetail, vechicleModel));
@@ -169,8 +189,61 @@ public class UserController {
                 return new ModelAndView("homePage", "message", "Data not inserted...");
             }            
         } catch (DatabaseException exp) {
-            exp.printStackTrace();
             return new ModelAndView("homePage", "message", exp.getMessage());           
+        }
+    }  
+    
+    /**
+     * String emi() gets loanperiod and loan amount through jsp and redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */    
+    @RequestMapping(value = "/emi", method = RequestMethod.GET)     
+    public String emi(@RequestParam("loanPeriod") int loanPeriod,@RequestParam("loanAmount") int loanAmount, ModelMap modelMap) {
+        modelMap.addAttribute("emi", loanService.getEmiDetails(loanPeriod, loanAmount));
+        modelMap.addAttribute("processingFees", loanService.getProcessingFees(loanPeriod, loanAmount));
+        modelMap.addAttribute("documentationCharges", loanService.getDocumentationCharges(loanPeriod, loanAmount));
+        return "emi";
+    }     
+    
+    /**
+     * ModelAndView addLoanDetail method gets loan details from user and transfer to corresponds jsp file.
+     * @param loan
+     *      It contains loan details of an user.
+     * @param modelMap
+     *      It's like a hashmap used to store key and value.
+     * @return
+     *      Returns to the jsp file for output.
+     */
+    @RequestMapping(value = "/addloandetail", method = RequestMethod.GET)
+    public String addLoanDetail(@ModelAttribute("loan") Loan loan, BindingResult bindingResult, ModelMap modelMap) {
+        try {
+            loanService.addLoan(loan);
+            loanDetailService.addLoanDetail(new LoanDetail(loan.getLoanAmount(), loan.getLoanPeriod(), loan.getUser()));
+            modelMap.addAttribute("userAddress", new UserAddress()); 
+            return "address";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", exp.getMessage());
+            return "loan";
+        }
+    }   
+    
+    /**
+     * ModelAndView addAddress method gets address from user and transfer to corresponds jsp file.
+     * @param address
+     *      It contains user address detail.
+     * @param modelMap
+     *      It's like a hashmap used to store key and value.
+     * @return
+     *      Returns to jsp file.
+     */
+    @RequestMapping(value = "/address", method = RequestMethod.POST)
+    public ModelAndView addAddress(@ModelAttribute("userAddress") UserAddress userAddress, BindingResult bindingResult, ModelMap modelMap) {
+        try {
+            userAddressService.addAddress(userAddress);
+            return new ModelAndView("address", "message", "Loan applied successfully we will contact you soon");
+        } catch (DatabaseException exp) {
+            return new ModelAndView("address", "message", exp.getMessage());
         }
     }    
 }

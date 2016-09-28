@@ -1,17 +1,64 @@
 <%@ include file="/common/taglibs.jsp" %>
-
+<html lang="en">
 <head>
-    <title><fmt:message key="login.title"/></title>
-    <meta name="menu" content="Login"/>
+    <title>I2I Vehicle Loan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body id="login">
-
+<body style="padding-top:0px;">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="contact">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="signup"><span class="glyphicon glyphicon-log-in" style = "color:blue;"></span> New User</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid text-center">    
+  <div class="row content">
+<div class="col-md-8 text-left"> 
+<div id="mycarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="item active">
+        <img src="img/twowheeler.png" alt="" class="img-responsive">
+           <div class="carousel-caption">
+                                        
+           </div>
+        </div>
+    </div>
+</div>
+<h1>Welcome</h1>
+      <p>I2I Vehicle Loan pvt ltd is one of the superior, proactive loan service in the world. While providing cost effective, responsive service to others in our role as a development bank, and in doing so, meet the requirements of our stakeholders.
+      	We, at I2I pvt ltd, are commited to become the bank of choice by providing SUPERIOR, PRO-ACTIVE, INNOVATIVE, STATE-OF-THE-ART banking services with an attitude of care and concern for the customers and patrons. </p>
+      <hr>
+    </div>
+    <div class="row row-bottom-margin">
+    <div class="col-sm-4 sidenav">
+<div class = "panel panel-default col-sm-offset-0 col-sm-11 col">
+   <div class = "panel-heading">
+      <h2 class = "panel-title text-center title-style">
+         Login
+      </h2>
+   </div>    
 <form method="post" id="loginForm" action="<c:url value='/j_security_check'/>"
     onsubmit="saveUsername(this);return validateForm(this)" class="form-signin" autocomplete="off">
-    <h2 class="form-signin-heading">
-        <fmt:message key="login.heading"/>
-    </h2>
-<c:if test="${param.error != null}">
+    <c:if test="${param.error != null}">
     <div class="alert alert-danger alert-dismissable">
         <fmt:message key="errors.password.mismatch"/>
     </div>
@@ -31,19 +78,15 @@
         <fmt:message key='button.login'/>
     </button>
 </form>
-
-<p>
-    <fmt:message key="login.signup">
-        <fmt:param><c:url value="/signup"/></fmt:param>
-    </fmt:message>
-</p>
-
-<c:set var="scripts" scope="request">
-<%@ include file="/scripts/login.js"%>
-</c:set>
-
-<p><fmt:message key="login.passwordHint"/></p>
-
-<p><fmt:message key="updatePassword.requestRecoveryTokenLink"/></p>
-
+</div>
+</div>
+</div>
+</div>
+</div>
+<c:if test="${null != message}" >
+        <script language = "javaScript" type = "text/javascript">
+            alert('<c:out value = "${message}" />');
+            window.location.href="homePage";
+        </script>
+    </c:if>
 </body>

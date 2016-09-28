@@ -18,5 +18,6 @@
         <mapping class = "com.i2i.vehicleloan.model.Vehicle"/>  
         <mapping class = "com.i2i.vehicleloan.model.VehicleModel"/>   
         <mapping class = "com.i2i.vehicleloan.model.Company"/> 
+        <mapping class = "com.i2i.vehicleloan.model.UserAddress"/> 
     </session-factory>
 </hibernate-configuration>

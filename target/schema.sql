@@ -1,4 +1,8 @@
 
+    alter table address 
+        drop 
+        foreign key FK_7rod8a71yep5vxasb0ms3osbg;
+
     alter table eligibility_detail 
         drop 
         foreign key FK_mmkxmdmf6j6q909qyhwlkh9c5;
@@ -59,6 +63,8 @@
         drop 
         foreign key FK_blcifx8427v63xg2jtrc9dy4d;
 
+    drop table if exists address;
+
     drop table if exists app_user;
 
     drop table if exists company_detail;
@@ -78,6 +84,17 @@
     drop table if exists vehicle;
 
     drop table if exists vehicle_model;
+
+    create table address (
+        address_id integer not null auto_increment,
+        city varchar(255),
+        landmark varchar(255),
+        pincode integer,
+        state varchar(255),
+        street varchar(255),
+        user_id bigint,
+        primary key (address_id)
+    ) ENGINE=InnoDB;
 
     create table app_user (
         id bigint not null auto_increment,
@@ -103,7 +120,7 @@
     ) ENGINE=InnoDB;
 
     create table company_detail (
-        company_id integer not null,
+        company_id integer not null auto_increment,
         company_name varchar(255),
         primary key (company_id)
     ) ENGINE=InnoDB;
@@ -120,7 +137,7 @@
     ) ENGINE=InnoDB;
 
     create table loan (
-        loan_id integer not null,
+        loan_id integer not null auto_increment,
         date varchar(255),
         documentation_charges float,
         emi_in_rupees float,
@@ -165,13 +182,13 @@
     ) ENGINE=InnoDB;
 
     create table vehicle (
-        vehicle_id integer not null,
+        vehicle_id integer not null auto_increment,
         vehicle_name varchar(255),
         primary key (vehicle_id)
     ) ENGINE=InnoDB;
 
     create table vehicle_model (
-        vehicle_model_id integer not null,
+        vehicle_model_id integer not null auto_increment,
         price_in_rupees integer,
         vehicle_model_name varchar(255),
         vehicle_id integer,
@@ -183,6 +200,11 @@
 
     alter table app_user 
         add constraint UK_3k4cplvh82srueuttfkwnylq0  unique (username);
+
+    alter table address 
+        add constraint FK_7rod8a71yep5vxasb0ms3osbg 
+        foreign key (user_id) 
+        references app_user (id);
 
     alter table eligibility_detail 
         add constraint FK_mmkxmdmf6j6q909qyhwlkh9c5 

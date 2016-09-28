@@ -22,6 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "payment")
 public class Payment {
+    
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "payment_id")
