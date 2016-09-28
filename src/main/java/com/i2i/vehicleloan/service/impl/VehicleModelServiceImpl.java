@@ -2,18 +2,13 @@ package com.i2i.vehicleloan.service.impl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.stereotype.Service;
 
-import com.i2i.vehicleloan.dao.VehicleDao;
 import com.i2i.vehicleloan.dao.VehicleModelDao;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.VehicleModel;
 import com.i2i.vehicleloan.service.VehicleModelService;
-import com.i2i.vehicleloan.util.ValidationUtil;
 
 @Service("vehicleModelService")
 public class VehicleModelServiceImpl extends GenericManagerImpl<VehicleModel, Long> implements VehicleModelService {

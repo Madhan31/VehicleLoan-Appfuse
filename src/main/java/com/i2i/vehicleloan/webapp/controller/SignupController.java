@@ -16,7 +16,6 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +49,7 @@ public class SignupController extends BaseFormController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String onSubmit(final User user, ModelMap modelMap, final BindingResult errors, final HttpServletRequest request, final HttpServletResponse response)
+    public String onSubmit(final User user, final BindingResult errors, final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
         if (request.getParameter("cancel") != null) {
             return getCancelView();
@@ -97,10 +96,10 @@ public class SignupController extends BaseFormController {
         request.getSession().setAttribute(Constants.REGISTERED, Boolean.TRUE);
 
         // log user in automatically
-        final UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+        /*final UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                 user.getUsername(), password, user.getAuthorities());
         auth.setDetails(user);
-        SecurityContextHolder.getContext().setAuthentication(auth);
+        SecurityContextHolder.getContext().setAuthentication(auth);*/
 
         // Send user an e-mail
         if (log.isDebugEnabled()) {

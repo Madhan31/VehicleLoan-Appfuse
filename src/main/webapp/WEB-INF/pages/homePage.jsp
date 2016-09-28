@@ -125,7 +125,9 @@ function loadvehicleprice() {
    		 <tr>	      
         <td><form:input type = "text" name = "downpayment" path = "downPayment" placeholder = "Down Payment" required = "required" class="form-control"/></td>
         </tr>
-
+        <tr>
+        
+        </tr>
         </table>  
         </div>              
         <input type = "submit" name = "button" value = "Proceed" class="btn btn-info btn-lg pull-left col-sm-4 border input-align"/>

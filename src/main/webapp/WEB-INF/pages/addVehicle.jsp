@@ -1,5 +1,4 @@
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ include file="/common/taglibs.jsp" %>   
   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -84,7 +83,7 @@
                  <div class = "panel-footer footer-align"><input type = "submit" name = "button" value = "Add" class="btn btn-info btn-lg pull-right col-sm-4 border input-align"/></div>
         </form:form>
         </div>
-        <c:if test="${message != null}" >
+        <c:if test="${null != message}" >
         <script language = "javaScript" type = "text/javascript">
             alert('<c:out value = "${message}" />');
             window.location.href = "insertVehicle";

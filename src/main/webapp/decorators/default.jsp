@@ -35,8 +35,5 @@
    }
 %>    
 
-<c:if test="${sessionScope['currentRole'] == 'ROLE_ADMIN'}">
-	<c:redirect url="/adminOperation"/>
-</c:if>
 </body>
 </html>

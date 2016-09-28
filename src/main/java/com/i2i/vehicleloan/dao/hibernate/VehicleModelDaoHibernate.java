@@ -41,8 +41,11 @@ public class VehicleModelDaoHibernate extends GenericDaoHibernate<VehicleModel, 
      */        
     public void saveVehicleModel(VehicleModel vehicleModel) throws DatabaseException {
         try {
-            getSession().save(vehicleModel);
+            Session session = getSession();
+            session.saveOrUpdate(vehicleModel);
+            session.flush();
         } catch (HibernateException exp) {
+            exp.printStackTrace();
             throw new DatabaseException("Error occured in add vehicle model");
         }
     }
