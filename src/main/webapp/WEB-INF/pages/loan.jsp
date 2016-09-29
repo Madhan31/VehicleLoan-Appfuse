@@ -100,7 +100,9 @@ function getDate()
 	<tr>
 	<td><div id = "emiDetails"></div></td>
 	</tr>
-
+	<tr>	
+   	<td><form:input type = "hidden" path = "eligibilityDetail.id" value = "${eligibilityDetailId}" /></td>
+   	</tr>
     </table>
     </div>  
     <input type = "submit" name = "button" value = "Apply Loan" class="btn btn-info btn-lg pull-right col-sm-4 border input-align"/>

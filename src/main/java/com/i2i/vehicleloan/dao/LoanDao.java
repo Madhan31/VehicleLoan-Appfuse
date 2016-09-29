@@ -58,7 +58,7 @@ public interface LoanDao extends GenericDao<Loan, Long> {
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
      */
-    List<Loan> retrieveLoansByUserId(int userId) throws DatabaseException;
+    List<Loan> retrieveLoansByUserId(Long userId) throws DatabaseException;
     
     /**
      * Retrieve all loan detail from database and returns to service method. 

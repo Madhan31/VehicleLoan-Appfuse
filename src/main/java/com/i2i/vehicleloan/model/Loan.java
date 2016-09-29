@@ -56,6 +56,10 @@ public class Loan {
     @JoinColumn(name = "user_id")
     private User user;
     
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "payment_id")
+    private Set<LoanDetail> loanDetails = new HashSet<LoanDetail>();    
+    
     /**
      * Constructor without object is used to create a loan object.
      */
@@ -99,10 +103,6 @@ public class Loan {
         this.user = user;
         this.loanDetails = loanDetails;
     }
-
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "payment_id")
-    private Set<LoanDetail> loanDetails = new HashSet<LoanDetail>();
 
     public int getLoanId() {
         return loanId;

@@ -18,7 +18,7 @@ import com.i2i.vehicleloan.service.LoanService;
  * It contain all the business logic operation of loan class.
  * </p> 
  * 
- * @author admin-pc
+ * @author vicky
  *
  * @since 2016-09-06
  */
@@ -92,7 +92,7 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application. 
      */
-    public List<Loan> retrieveLoansByUserId(int userId) throws DatabaseException {
+    public List<Loan> retrieveLoansByUserId(Long userId) throws DatabaseException {
         return loanDao.retrieveLoansByUserId(userId);
     }
     

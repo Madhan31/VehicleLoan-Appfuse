@@ -93,7 +93,7 @@ public class LoanDaoHibernate extends GenericDaoHibernate<Loan, Long> implements
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
      */
-    public List<Loan> retrieveLoansByUserId(int userId) throws DatabaseException {
+    public List<Loan> retrieveLoansByUserId(Long userId) throws DatabaseException {
         try {
             List<Loan> loans = getSession().createQuery("from Loan where user_id = '"+userId+"'").list();
             return loans;

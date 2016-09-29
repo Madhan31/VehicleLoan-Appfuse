@@ -63,7 +63,7 @@ public interface LoanService extends GenericManager<Loan, Long> {
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
      */
-    List<Loan> retrieveLoansByUserId(int userId) throws DatabaseException;
+    List<Loan> retrieveLoansByUserId(Long userId) throws DatabaseException;
     
     /**
      * Retrieve all the loan from database to controller method.

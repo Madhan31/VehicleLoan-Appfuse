@@ -12,6 +12,7 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page"%>
 <%@ taglib uri="http://www.appfuse.org/tags/spring" prefix="appfuse" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="m" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>

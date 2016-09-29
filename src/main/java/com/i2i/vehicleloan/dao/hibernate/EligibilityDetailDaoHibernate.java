@@ -41,7 +41,7 @@ public class EligibilityDetailDaoHibernate extends GenericDaoHibernate<Eligibili
      */
     public boolean insertEligibilityDetail(EligibilityDetail eligibilityDetail) throws DatabaseException {
         try {
-            getSession().save(eligibilityDetail);
+            getSession().saveOrUpdate(eligibilityDetail);
             return true;
         } catch (HibernateException exp) {
         	throw new DatabaseException("Oops...Cant add eligibilityDetail Kindly check your input and try again...\n", exp);            

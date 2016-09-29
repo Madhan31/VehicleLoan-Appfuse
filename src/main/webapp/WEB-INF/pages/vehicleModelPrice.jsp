@@ -1,5 +1,4 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "m" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ include file="/common/taglibs.jsp" %>
 <textarea  readonly style = "width: 300px; height: 40px; resize:none" class="form-control">
     <m:out value = "Rs. ${vehicleModel.price}"/>
 </textarea>

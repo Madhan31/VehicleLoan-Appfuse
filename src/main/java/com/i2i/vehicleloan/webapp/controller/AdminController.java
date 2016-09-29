@@ -2,6 +2,9 @@ package com.i2i.vehicleloan.webapp.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,6 +25,7 @@ import com.i2i.vehicleloan.service.CompanyService;
 import com.i2i.vehicleloan.service.EligibilityDetailService;
 import com.i2i.vehicleloan.service.LoanDetailService;
 import com.i2i.vehicleloan.service.LoanService;
+import com.i2i.vehicleloan.service.PaymentService;
 import com.i2i.vehicleloan.service.UserAddressService;
 import com.i2i.vehicleloan.service.UserManager;
 import com.i2i.vehicleloan.service.VehicleModelService;
@@ -38,6 +42,8 @@ public class AdminController {
     private LoanService loanService = null;
     private UserAddressService userAddressService = null;  
     private UserManager userManager = null;
+    private PaymentService paymentService = null;
+    
     
     @Autowired
     public void setVehicleService(VehicleService vehicleService) {
@@ -78,6 +84,11 @@ public class AdminController {
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }     
+    
+    @Autowired
+    public void setPaymentService(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
     
     /**
      * String adminOperation() redirects to jsp page when corresponding url is called as mapped below. 
@@ -254,25 +265,6 @@ public class AdminController {
     }
 	
 	/**
-	 * ModelAndView payment() redirects to jsp page when corresponding url is called as mapped below. 
-	 * @return
-	 * 		Returns jsp file name.
-	 */   
-	@RequestMapping("/payment")
-    public String payment(@RequestParam("userId") int userId, ModelMap modelMap) {
-    	try {
-        	List<Loan> loans = loanService.retrieveLoansByUserId(userId);
-        	modelMap.addAttribute("loans",loans);
-        	modelMap.addAttribute("userId",userId);
-        	modelMap.addAttribute("payment", new Payment());
-        	return "payment";
-    	} catch (DatabaseException exp) {
-    		modelMap.addAttribute("message", (exp.getMessage().toString()));
-    		return "loanDetail";
-    	}     	
-    }
-	
-	/**
 	 * String contact() redirects to jsp page when corresponding url is called as mapped below. 
 	 * @return
 	 * 		Returns jsp file name.
@@ -358,5 +350,73 @@ public class AdminController {
         	modelMap.addAttribute("message", (exp.getMessage().toString()));
         	return "companyOperation";
     	}
+    } 
+    
+    /**
+     * ModelAndView payment() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/payment")
+    public String payment(@RequestParam("userId") Long userId, ModelMap modelMap) {
+        try {
+            List<Loan> loans = loanService.retrieveLoansByUserId(userId);
+            modelMap.addAttribute("loans",loans);
+            modelMap.addAttribute("userId",userId);
+            modelMap.addAttribute("payment", new Payment());
+            return "payment";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "loanDetail";
+        }       
+    }
+    
+    /**
+     * ModelAndView paymentConfirm() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/paymentConfirm") 
+    public ModelAndView paymentConfirm(@ModelAttribute("payment") Payment payment, ModelMap modelMap, final HttpServletRequest request) {
+        try {
+            User user = userManager.getUserByUsername(request.getRemoteUser());
+            payment.setUser(user);            
+            modelMap.addAttribute("insert", paymentService.addPayment(payment));
+            return new ModelAndView("payment", "message", "Paided Sucessfully");
+        } catch (DatabaseException exp) {
+            return new ModelAndView("loanDetail", "message", (exp.getMessage().toString()));
+        }       
+    }    
+    
+    /**
+     * String retrievePaymentDetail() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/retrievePaymentDetail")
+    public String retrievePaymentDetail(@RequestParam("loanId") int loanId, ModelMap modelMap, HttpSession session) {
+        try {
+            modelMap.addAttribute("paymentDetails", paymentService.retrievePaymentsByLoanId(loanId));           
+            return "retrievePaymentDetail";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "retrieveLoanDetail";
+        }           
+    }  
+    
+    /**
+     * String retrieveUserPaymentDetail() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/retrieveUserPaymentDetail")
+    public String retrieveUserPaymentDetail(@RequestParam("loanId") int loanId, ModelMap modelMap, HttpSession session) {
+        try {
+            modelMap.addAttribute("paymentDetails", paymentService.retrievePaymentsByLoanId(loanId));           
+            return "retrieveUserPaymentDetail";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "retrieveUserDetail";
+        }           
     }    
 }

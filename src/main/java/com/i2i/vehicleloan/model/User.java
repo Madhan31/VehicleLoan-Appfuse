@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -69,6 +71,9 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private boolean accountExpired;
     private boolean accountLocked;
     private boolean credentialsExpired;
+    
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user", fetch = FetchType.LAZY)    
+    private Set<EligibilityDetail> eligbilityDetails = new HashSet<EligibilityDetail>();    
 
     /**
      * Default constructor - creates a new instance with no values set.
@@ -130,7 +135,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
         return lastName;
     }
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     @Field
     public String getEmail() {
         return email;

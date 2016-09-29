@@ -34,7 +34,7 @@ public class VehicleModel {
     @Column(name = "price_in_rupees")
     private int price;
     
-    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
     

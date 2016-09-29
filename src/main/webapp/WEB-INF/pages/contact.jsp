@@ -1,3 +1,4 @@
+<%@ include file="/common/taglibs.jsp" %>  
 <!DOCTYPE html>
 <html lang="en">
 <head>

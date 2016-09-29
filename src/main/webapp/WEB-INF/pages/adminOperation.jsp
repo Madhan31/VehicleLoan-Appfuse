@@ -1,3 +1,4 @@
+<%@ include file="/common/taglibs.jsp" %>  
 <html>
     <title>Admin Operation</title>
         <link rel="stylesheet" href="css/style.css">

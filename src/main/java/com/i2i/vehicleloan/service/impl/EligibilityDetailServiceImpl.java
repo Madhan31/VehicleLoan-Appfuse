@@ -9,6 +9,7 @@ import com.i2i.vehicleloan.dao.EligibilityDetailDao;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.EligibilityDetail;
 import com.i2i.vehicleloan.service.EligibilityDetailService;
+import com.i2i.vehicleloan.service.LoanService;
 import com.i2i.vehicleloan.util.ValidationUtil;
 
 /**
@@ -24,15 +25,17 @@ import com.i2i.vehicleloan.util.ValidationUtil;
 @Service("eligibilityDetailService")
 public class EligibilityDetailServiceImpl extends GenericManagerImpl<EligibilityDetail, Long> implements EligibilityDetailService {
     
-    @Autowired
     private EligibilityDetailDao eligibilityDetailDao;
+    private LoanService loanService; 
 
     /**
      * Constructor that sets the entity to Vehicle.class.
      */
-    public EligibilityDetailServiceImpl(EligibilityDetailDao eligibilityDetailDao) {
+    @Autowired
+    public EligibilityDetailServiceImpl(EligibilityDetailDao eligibilityDetailDao, LoanService loanService) {
         super(eligibilityDetailDao);
         this.eligibilityDetailDao = eligibilityDetailDao;
+        this.loanService = loanService;
     }
     
     public EligibilityDetailServiceImpl() { }
@@ -88,9 +91,9 @@ public class EligibilityDetailServiceImpl extends GenericManagerImpl<Eligibility
      *     It handle all the custom exception in vehicle loan application.
      */
     public boolean isVehicleModelExist(int vehicleModelId) throws DatabaseException {
-        //if (loanService.isLoanExistByEligibilityDetailId(eligibilityDetailDao.retrieveEligibilityDetail(vehicleModelId).getId())) {
+        if (loanService.isLoanExistByEligibilityDetailId(eligibilityDetailDao.retrieveEligibilityDetail(vehicleModelId).getId())) {
             return true;
-        //}
-        //return false;
+        }
+        return false;
     }
 }

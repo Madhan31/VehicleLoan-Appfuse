@@ -34,7 +34,7 @@ public class Vehicle {
     @Column(name = "vehicle_name")
     private String vehicleName;
     
-    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_model_id")
     private Set<VehicleModel> vehicleModels = new HashSet<VehicleModel>();
     

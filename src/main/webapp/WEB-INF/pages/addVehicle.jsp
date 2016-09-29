@@ -75,13 +75,11 @@
                 <td>Vehicle Name:</td>
                 <td><form:input type = "text" name = "vehicleName" path = "vehicleName" placeholder = "Vehicle name" required = "required" /></td>
                  </tr>
-                 <tr>
-                 <td> </td>
-                 <td> </td>
-                 </tr>
                  </table>
+                 </div>
                  <div class = "panel-footer footer-align"><input type = "submit" name = "button" value = "Add" class="btn btn-info btn-lg pull-right col-sm-4 border input-align"/></div>
         </form:form>
+        </div>
         </div>
         <c:if test="${null != message}" >
         <script language = "javaScript" type = "text/javascript">

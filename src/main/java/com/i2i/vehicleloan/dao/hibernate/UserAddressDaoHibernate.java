@@ -55,7 +55,7 @@ public class UserAddressDaoHibernate extends GenericDaoHibernate<UserAddress, Lo
      */
     public List<UserAddress> retrieveAddressesByUserId(int userId) throws DatabaseException {
         try {
-            List<UserAddress> addresses = getSession().createQuery("from Address where user_id="+userId).list();
+            List<UserAddress> addresses = getSession().createQuery("from UserAddress where user_id="+userId).list();
             return addresses;
         } catch (HibernateException exp) {
             throw new DatabaseException("Oops...Cannot retrieve address kindly check your input and try again...\n", exp);    

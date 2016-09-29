@@ -1,5 +1,6 @@
 package com.i2i.vehicleloan.webapp.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.EligibilityDetail;
 import com.i2i.vehicleloan.model.Loan;
 import com.i2i.vehicleloan.model.LoanDetail;
+import com.i2i.vehicleloan.model.User;
 import com.i2i.vehicleloan.model.UserAddress;
 import com.i2i.vehicleloan.model.VehicleModel;
 import com.i2i.vehicleloan.service.CompanyService;
@@ -177,8 +179,10 @@ public class UserController {
      *      Returns to jsp file to display the output.
      */
     @RequestMapping(value = "/addeligibilitydetail", method = RequestMethod.GET)
-    public ModelAndView addEligibilityDetail(@ModelAttribute("eligibilityDetail") EligibilityDetail eligibilityDetail, BindingResult bindingResult, ModelMap modelMap) {
+    public ModelAndView addEligibilityDetail(@ModelAttribute("eligibilityDetail") EligibilityDetail eligibilityDetail, BindingResult bindingResult, ModelMap modelMap, final HttpServletRequest request) {
         try {
+            User user = userManager.getUserByUsername(request.getRemoteUser());
+            eligibilityDetail.setUser(user);
             VehicleModel vechicleModel = vehicleModelService.getVehicleModelById(eligibilityDetail.getVehicleModel().getVehicleModelId()); 
             if (eligibilityDetailService.addEligibilityDetail(eligibilityDetail)) {
                 modelMap.addAttribute("eligibilityDetailId", eligibilityDetail.getId());
@@ -215,8 +219,10 @@ public class UserController {
      *      Returns to the jsp file for output.
      */
     @RequestMapping(value = "/addloandetail", method = RequestMethod.GET)
-    public String addLoanDetail(@ModelAttribute("loan") Loan loan, BindingResult bindingResult, ModelMap modelMap) {
+    public String addLoanDetail(@ModelAttribute("loan") Loan loan, BindingResult bindingResult, ModelMap modelMap, final HttpServletRequest request) {
         try {
+            User user = userManager.getUserByUsername(request.getRemoteUser());
+            loan.setUser(user);                
             loanService.addLoan(loan);
             loanDetailService.addLoanDetail(new LoanDetail(loan.getLoanAmount(), loan.getLoanPeriod(), loan.getUser()));
             modelMap.addAttribute("userAddress", new UserAddress()); 
@@ -237,12 +243,139 @@ public class UserController {
      *      Returns to jsp file.
      */
     @RequestMapping(value = "/address", method = RequestMethod.POST)
-    public ModelAndView addAddress(@ModelAttribute("userAddress") UserAddress userAddress, BindingResult bindingResult, ModelMap modelMap) {
+    public ModelAndView addAddress(@ModelAttribute("userAddress") UserAddress userAddress, BindingResult bindingResult, ModelMap modelMap, final HttpServletRequest request) {
         try {
+            User user = userManager.getUserByUsername(request.getRemoteUser());
+            userAddress.setUser(user);                
             userAddressService.addAddress(userAddress);
             return new ModelAndView("address", "message", "Loan applied successfully we will contact you soon");
         } catch (DatabaseException exp) {
             return new ModelAndView("address", "message", exp.getMessage());
         }
+    }  
+    
+    /**
+     * String retrieveUserLoanDetail() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/usersDetail")
+    public String retrieveAllUsers(ModelMap modelMap) {
+        modelMap.addAttribute("usersDetail", userManager.getUsers());           
+        return "retrieveUsersDetail";   
+    }    
+    
+    /**
+     * String retrieveUserAddress() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/retrieveUserAddress")
+    public String retrieveUserAddress(@RequestParam("userId") int userId, ModelMap modelMap) {      
+        try {           
+            modelMap.addAttribute("userAddress", userAddressService.retrieveAddressByUserId(userId));
+            return "retrieveUserAddress";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "retrieveUsersDetail";
+        }      
+    }    
+    
+    /**
+     * String retrieveEligibilityDetailByUserId() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/retrieveUserEligibilityDetail")
+    public String retrieveEligibilityDetailsByUserId(@RequestParam("userId") int userId, ModelMap modelMap) {
+        try {
+            modelMap.addAttribute("eligibilityDetails", eligibilityDetailService.retrieveEligibilityDetailsByUserId(userId));           
+            return "retrieveEligibilityDetail";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "retrieveUsersDetail";
+        }          
+    }    
+    
+    /**
+     * String retrieveUserLoanDetail() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/retrieveUserLoanDetail")
+    public String retrieveUserLoanDetail(ModelMap modelMap, HttpServletRequest request) {
+        try {
+            User user = userManager.getUserByUsername(request.getRemoteUser());
+            modelMap.addAttribute("loanDetails", loanService.retrieveLoansByUserId(user.getId()));
+            return "retrieveLoanDetail";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "adminOperation";
+        }      
+    }   
+    
+    /**
+     * String retrieveUserDetail() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/retrieveUserDetail")
+    public String retrieveUserDetail(ModelMap modelMap, HttpServletRequest request) {
+        try {
+            User user = userManager.getUserByUsername(request.getRemoteUser());
+            modelMap.addAttribute("loanDetails", loanService.retrieveLoansByUserId(user.getId()));
+            return "retrieveUserDetail";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "userOperation";
+        }     
+    }   
+    
+    /**
+     * String retrieveLoanBalance() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/retrieveLoanBalance")
+    public String retrieveUserLoanBalance(@RequestParam("loanId") int loanId, ModelMap modelMap) {      
+        try {           
+            modelMap.addAttribute("loanBalance", loanDetailService.retrieveLoanDetailByLoanId(loanId));
+            return "retrieveLoanBalance";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "retrieveLoanDetail";
+        }       
+    }    
+    
+    /**
+     * String retrieveUserLoanBalance() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/retrieveUserLoanBalanceDetail")
+    public String retrieveUserLoanBalanceDetail(@RequestParam("loanId") int loanId, ModelMap modelMap) {        
+        try {           
+            modelMap.addAttribute("loanBalance", loanDetailService.retrieveLoanDetailByLoanId(loanId));
+            return "retrieveUserLoanBalance";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "retrieveUserDetail";
+        }       
+    }   
+    
+    /**
+     * ModelAndView retrieveLoanDetail() redirects to jsp page when corresponding url is called as mapped below. 
+     * @return
+     *      Returns jsp file name.
+     */      
+    @RequestMapping("/retrieveLoanDetail")
+    public String retrieveLoanDetail(@RequestParam("userId") Long userId, ModelMap modelMap) {
+        try {
+            modelMap.addAttribute("loanDetails", loanService.retrieveLoansByUserId(userId));            
+            return "retrieveLoanDetail";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "userOperation";
+        }       
     }    
 }
