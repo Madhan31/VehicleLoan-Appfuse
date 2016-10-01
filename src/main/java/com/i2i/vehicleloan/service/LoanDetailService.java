@@ -64,5 +64,5 @@ public interface LoanDetailService {
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
      */
-    public LoanDetail retrieveLoanDetailByUserId(int userId)throws DatabaseException;
+    public LoanDetail retrieveLoanDetailByUserId(Long userId)throws DatabaseException;
 }

@@ -39,7 +39,7 @@ public interface EligibilityDetailService extends GenericManager<EligibilityDeta
      * @throws DatabaseException
      *         It handle all the custom exception in vehicle loan application.
      */   
-    List<EligibilityDetail> retrieveEligibilityDetailsByUserId(int userId) throws DatabaseException;
+    EligibilityDetail retrieveEligibilityDetailsByUserId(int userId) throws DatabaseException;
     
     /**
      * Calls eligibility dao methods to retrieve eligibility details.

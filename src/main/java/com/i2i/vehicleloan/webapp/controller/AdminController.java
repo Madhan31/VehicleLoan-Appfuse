@@ -132,8 +132,15 @@ public class AdminController {
 	 * 		Returns jsp file name.
 	 */   
     @RequestMapping("/deleteVehicle")
-    public String deleteVehicle() {
-        return "removeVehicle";
+    public String deleteVehicle(ModelMap modelMap) {
+        try {
+            List<Vehicle> vehicles = vehicleService.retrieveVehicles();
+            modelMap.addAttribute("vehicles", vehicles);            
+            return "removeVehicle";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "vehicleOperation";
+        }
     }
     
     /**
@@ -206,8 +213,15 @@ public class AdminController {
 	 * 		Returns jsp file name.
 	 */   
     @RequestMapping("/deleteVehicleModel")
-    public String deleteVehicleModel() {
-        return "removeVehicleModel";
+    public String deleteVehicleModel(ModelMap modelMap) {
+        try {
+            List<VehicleModel> vehicleModels = vehicleModelService.retrieveAllVehicleModel();
+            modelMap.addAttribute("vehicleModels", vehicleModels);          
+            return "removeVehicleModel";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "vehicleModelOperation";
+        }
     }
     
     /**
@@ -316,8 +330,15 @@ public class AdminController {
 	 * 		Returns jsp file name.
 	 */  
     @RequestMapping("/deleteCompany")
-    public String deleteCompany() {
-        return "removeCompany";
+    public String deleteCompany(ModelMap modelMap) {
+        try {
+            List<Company> companies = companyService.retrieveCompanies();
+            modelMap.addAttribute("companies", companies);          
+            return "removeCompany";
+        } catch (DatabaseException exp) {
+            modelMap.addAttribute("message", (exp.getMessage().toString()));
+            return "vehicleModelOperation";
+        }        
     }
     
     /**

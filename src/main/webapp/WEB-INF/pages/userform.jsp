@@ -1,26 +1,98 @@
 <%@ include file="/common/taglibs.jsp"%>
 
-<head>
-    <title><fmt:message key="userProfile.title"/></title>
-    <meta name="menu" content="UserMenu"/>
-</head>
-
+<title>Add admin</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         </head>
+         <style>
+   .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+    <body>
+        <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="adminOperation">Home</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Vehicle Operation<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="insertVehicle">Add Vehicle</a></li>
+              <li><a href="deleteVehicle">Delete Vehicle</a></li>
+              <li><a href="retrieveAllVehicle">Display All Vehicle</a></li> 
+            </ul>
+          </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Vehicle Model Operation<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="insertVehicleModel">Add Vehicle</a></li>
+              <li><a href="deleteVehicleModel">Delete Vehicle</a></li>
+              <li><a href="retrieveAllVehicleModel">Display All Vehicle</a></li> 
+            </ul>
+          </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Company Operation<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="insertCompany">Add Company</a></li>
+              <li><a href="deleteCompany">Delete Company</a></li>
+              <li><a href="retrieveAllCompany">Display All Company</a></li> 
+            </ul>
+          </li>
+          <li><a href="loanDetail">Loan Payment</a></li>
+        <li class = "active"><a href="#">Add Admin</a></li>
+        <li><a href="usersDetail">Users Detail</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="logout"><span class="glyphicon glyphicon-log-in" style="color:red"></span> Log out</a></li>
+      </ul>
+    </div>
+  </div>
+  </nav>
+         <div class = "panel panel-default col-sm-offset-4 col-sm-4 col">
+   <div class = "panel-heading">
+      <h2 class = "panel-title text-center title-style">
+         Add Admin Detail
+      </h2>
 <c:set var="delObject" scope="request"><fmt:message key="userList.user"/></c:set>
 <script type="text/javascript">var msgDelConfirm =
    "<fmt:message key="delete.confirm"><fmt:param value="${delObject}"/></fmt:message>";
 </script>
 
-<div class="col-sm-2">
-    <h2><fmt:message key="userProfile.heading"/></h2>
-    <c:choose>
-        <c:when test="${param.from == 'list'}">
-            <p><fmt:message key="userProfile.admin.message"/></p>
-        </c:when>
-        <c:otherwise>
-            <p><fmt:message key="userProfile.message"/></p>
-        </c:otherwise>
-    </c:choose>
-</div>
 <div class="col-sm-7">
     <spring:bind path="user.*">
         <c:if test="${not empty status.errorMessages}">
@@ -32,7 +104,7 @@
             </div>
         </c:if>
     </spring:bind>
-
+    </div>
     <form:form commandName="user" method="post" action="userform" id="userForm" autocomplete="off"
                cssClass="well" onsubmit="return validateUser(this)">
         <form:hidden path="id"/>
@@ -51,7 +123,13 @@
                 </span>
             </c:if>
         </div>
-
+        <spring:bind path="user.password">
+            <div class="form-group${(not empty status.errorMessage) ? ' has-error' : ''}">
+            </spring:bind>
+                <appfuse:label styleClass="control-label" key="user.password"/>
+                <form:password cssClass="form-control" path="password" id="password" showPassword="true"/>
+                <form:errors path="password" cssClass="help-block"/>
+            </div>
         <spring:bind path="user.passwordHint">
         <div class="form-group${(not empty status.errorMessage) ? ' has-error' : ''}">
         </spring:bind>
@@ -88,63 +166,8 @@
                 <form:input cssClass="form-control" path="phoneNumber" id="phoneNumber"/>
             </div>
         </div>
-        <div class="form-group">
-            <appfuse:label styleClass="control-label" key="user.website"/>
-            <form:input cssClass="form-control" path="website" id="website"/>
-        </div>
-        <div>
-            <legend class="accordion-heading">
-                <a data-toggle="collapse" href="#collapse-address"><fmt:message key="user.address.address"/></a>
-            </legend>
-            <div id="collapse-address" class="accordion-body collapse">
-                <div class="form-group">
-                    <appfuse:label styleClass="control-label" key="user.address.address"/>
-                    <form:input cssClass="form-control" path="address.address" id="address.address"/>
-                </div>
-                <div class="row">
-                    <div class="col-sm-7 form-group">
-                        <appfuse:label styleClass="control-label" key="user.address.city"/>
-                        <form:input cssClass="form-control" path="address.city" id="address.city"/>
-                    </div>
-                    <div class="col-sm-2 form-group">
-                        <appfuse:label styleClass="control-label" key="user.address.province"/>
-                        <form:input cssClass="form-control" path="address.province" id="address.province"/>
-                    </div>
-                    <div class="col-sm-3 form-group">
-                        <appfuse:label styleClass="control-label" key="user.address.postalCode"/>
-                        <form:input cssClass="form-control" path="address.postalCode" id="address.postalCode"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <appfuse:label styleClass="control-label" key="user.address.country"/>
-                    <appfuse:country name="address.country" prompt="" default="${user.address.country}"/>
-                </div>
-            </div>
-        </div>
 <c:choose>
     <c:when test="${param.from == 'list' or param.method == 'Add'}">
-        <div class="form-group">
-            <label class="control-label"><fmt:message key="userProfile.accountSettings"/></label>
-            <label class="checkbox-inline">
-                <form:checkbox path="enabled" id="enabled"/>
-                <fmt:message key="user.enabled"/>
-            </label>
-
-            <label class="checkbox-inline">
-                <form:checkbox path="accountExpired" id="accountExpired"/>
-                <fmt:message key="user.accountExpired"/>
-            </label>
-
-            <label class="checkbox-inline">
-                <form:checkbox path="accountLocked" id="accountLocked"/>
-                <fmt:message key="user.accountLocked"/>
-            </label>
-
-            <label class="checkbox-inline">
-                <form:checkbox path="credentialsExpired" id="credentialsExpired"/>
-                <fmt:message key="user.credentialsExpired"/>
-            </label>
-        </div>
         <div class="form-group">
             <label for="userRoles" class="control-label"><fmt:message key="userProfile.assignRoles"/></label>
             <select id="userRoles" name="userRoles" multiple="true" class="form-control">

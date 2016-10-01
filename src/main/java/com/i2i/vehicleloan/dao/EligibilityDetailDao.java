@@ -36,7 +36,7 @@ public interface EligibilityDetailDao extends GenericDao<EligibilityDetail, Long
      * @throws ApplicationException
      *     It handle all the custom exception in vehicle loan application.
      */
-    List<EligibilityDetail> retrieveEligibilityDetailsByUserId(int userId) throws DatabaseException; 
+    EligibilityDetail retrieveEligibilityDetailsByUserId(int userId) throws DatabaseException; 
     
     /**
      * To retrieve the eligibility detail by using vehicle model ID.

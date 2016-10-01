@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.i2i.vehicleloan.Constants;
 import com.i2i.vehicleloan.dao.LoanDao;
 import com.i2i.vehicleloan.exception.DatabaseException;
 import com.i2i.vehicleloan.model.EligibilityDetail;
@@ -150,71 +151,44 @@ public class LoanServiceImpl extends GenericManagerImpl<Loan, Long> implements L
     }
     
     /**
-     * Here calculate the emi amount based on user selected emi period.
+     * Here calculates the emi amount based on user selected loan period.
      * 
      * @param loanPeriod
-     *     Get the loan period from cotroller.
+     *     Get the loan period from controller.
      * @param loanAmount
-     *     Get the loan amount from cotroller.
+     *     Get the loan amount from controller.
      * @return
-     *     It return the value to controller.
+     *     It return the emi value to the controller.
      */
     public float getEmiDetails(int loanPeriod, int loanAmount) {
-        if (loanPeriod == 12) {    // Here 12 indicates emi period 
-            return (loanAmount + loanAmount * 10/100)/loanPeriod;
-        }
-        if (loanPeriod == 24) {    // Here 24 indicates emi period
-            return (loanAmount + loanAmount * 15/100)/loanPeriod;
-        }
-        if (loanPeriod == 36) {    // Here 36 indicates emi period
-            return (loanAmount + loanAmount * 18/100)/loanPeriod;
-        }
-        return 0;        
+        return (loanAmount + loanAmount * Constants.INTEREST_RATE/Constants.CENT_PERCENT * loanPeriod * Constants.INTEREST_ON_LOANPERIOD)/loanPeriod;    
     }
     
     /**
-     * Here calculate the processing fees amount based on user selected emi period.
+     * Here calculates the processing fees amount based on user selected loan period.
      * 
      * @param loanPeriod
-     *     Get the loan period from cotroller.
+     *     Get the loan period from controller.
      * @param loanAmount
-     *     Get the loan amount from cotroller.
+     *     Get the loan amount from controller.
      * @return
-     *     It return the value to controller.
+     *     It return the processing fees to controller.
      */
     public float getProcessingFees(int loanPeriod, int loanAmount) {
-        if (loanPeriod == 12) {    // Here 12 indicates emi period 
-            return (loanAmount * 1/100);
-        }
-        if (loanPeriod == 24) {    // Here 24 indicates emi period 
-            return (loanAmount * 2/100);
-        }
-        if (loanPeriod == 36) {    // Here 36 indicates emi period 
-            return (loanAmount * 3/100);
-        }
-        return 0;        
+        return ((loanAmount * loanPeriod) * Constants.PROCESSING_FEES);     
     }
     
     /**
-     * Here calculate the documentation charge amount based on user selected emi period.
+     * Here calculates the documentation charge amount based on user selected loan period.
      * 
      * @param loanPeriod
-     *     Get the loan period from cotroller.
+     *     Get the loan period from controller.
      * @param loanAmount
-     *     Get the loan amount from cotroller.
+     *     Get the loan amount from controller.
      * @return
-     *     It return the value to controller.
+     *     It return the documentation charges to controller.
      */
     public float getDocumentationCharges(int loanPeriod, int loanAmount) {
-        if (loanPeriod == 12) {    // Here 12 indicates emi period 
-            return (loanAmount * 3/100);
-        }
-        if (loanPeriod == 24) {    // Here 24 indicates emi period 
-            return (loanAmount * 2/100);
-        }
-        if (loanPeriod == 36) {    // Here 36 indicates emi period 
-            return (loanAmount * 1/100);
-        }
-        return 0;         
+        return (loanAmount / loanPeriod * Constants.DOCUMENTATION_CHARGES);        
     }    
 }

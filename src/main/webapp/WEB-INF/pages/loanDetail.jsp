@@ -50,7 +50,7 @@
             </ul>
           </li>
          <li class = "active"><a href="#">Loan Payment</a></li>
-        <li><a href="admin">Add Admin</a></li>
+        <li><a href="admin/users">Administrators</a></li>
         <li><a href="usersDetail">Users Detail</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

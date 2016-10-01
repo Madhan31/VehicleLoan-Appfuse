@@ -46,9 +46,9 @@ public class UserAddressServiceImpl extends GenericManagerImpl<UserAddress, Long
      *     It handle all the custom exception in vehicle loan application.      
      */
     public void addAddress(UserAddress userAddress) throws DatabaseException {
-        /*if (!ValidationUtil.isNumeric(String.valueOf(userAddress.getPincode()))) {
+        if (!ValidationUtil.isNumeric(String.valueOf(userAddress.getPincode()))) {
             throw new DatabaseException("Kindly Enter valid pincode...");
-        }*/
+        }
         userAddressDao.insertAddress(userAddress);
     }
     

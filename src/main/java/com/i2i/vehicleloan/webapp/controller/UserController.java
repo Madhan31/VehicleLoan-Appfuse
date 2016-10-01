@@ -129,7 +129,7 @@ public class UserController {
             modelMap.addAttribute("eligibilityDetail", new EligibilityDetail());
             modelMap.addAttribute("vehicleList", vehicleService.retrieveVehicles());
             modelMap.addAttribute("companyList", companyService.retrieveCompanies());            
-            //modelMap.addAttribute("loanDetail", loanDetailService.retrieveLoanDetailByUserId((int)session.getAttribute("userId")));
+            modelMap.addAttribute("loanDetail", loanDetailService.retrieveLoanDetailByUserId((Long) session.getAttribute("currentUserId")));
             return "homePage";
         } catch (DatabaseException exp) {
             modelMap.addAttribute("message", (exp.getMessage().toString()));
@@ -289,6 +289,8 @@ public class UserController {
     @RequestMapping("/retrieveUserEligibilityDetail")
     public String retrieveEligibilityDetailsByUserId(@RequestParam("userId") int userId, ModelMap modelMap) {
         try {
+            EligibilityDetail eli = eligibilityDetailService.retrieveEligibilityDetailsByUserId(userId);
+            System.out.println(eli.getCurrentCity());
             modelMap.addAttribute("eligibilityDetails", eligibilityDetailService.retrieveEligibilityDetailsByUserId(userId));           
             return "retrieveEligibilityDetail";
         } catch (DatabaseException exp) {

@@ -76,7 +76,7 @@ public class EligibilityDetailServiceImpl extends GenericManagerImpl<Eligibility
      * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
      */   
-    public List<EligibilityDetail> retrieveEligibilityDetailsByUserId(int userId) throws DatabaseException {
+    public EligibilityDetail retrieveEligibilityDetailsByUserId(int userId) throws DatabaseException {
         return eligibilityDetailDao.retrieveEligibilityDetailsByUserId(userId);
     }   
     

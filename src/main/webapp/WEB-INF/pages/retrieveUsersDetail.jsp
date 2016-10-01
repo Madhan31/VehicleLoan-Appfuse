@@ -41,7 +41,7 @@
             </ul>
           </li>
           <li><a href="loanDetail">Loan Payment</a></li>
-        <li><a href="admin">Add Admin</a></li>
+        <li><a href="admin/users">Administrators</a></li>
         <li class = "active"><a href="#">Users Detail</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

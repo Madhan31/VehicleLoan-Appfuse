@@ -25,9 +25,9 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="adminOperation">Home</a></li>
+        <li><a href="userOperation">Home</a></li>
         <li class = "active"><a href="#">Loan Detail</a></li>
-        <li><a href="usersDetail">Go Back</a></li>
+        <li><a onclick="javascript:history.back()">Go Back</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="logout"><span class="glyphicon glyphicon-log-in" style="color:red"></span> Log out</a></li>
@@ -74,7 +74,7 @@
         		<c:out value = "Currently you dont have any loan." />
         </c:if>
     <body>
-    <c:if test="${message != null}" >
+    <c:if test="${null != message}" >
         <script language = "javaScript" type = "text/javascript">
             alert('<c:out value = "${message}" />');
         </script>

@@ -86,4 +86,34 @@ public final class Constants {
      * @deprecated No longer used to set themes.
      */
     public static final String CSS_THEME = "csstheme";
+    
+    /**
+     * The value of the hundred, a request-scoped attribute
+     * when applying for loan.
+     */
+    public static final float CENT_PERCENT  = 100;     
+    
+    /**
+     * The value of the interest, a request-scoped attribute
+     * when applying for loan.
+     */
+    public static final float INTEREST_RATE = 5; 
+    
+    /**
+     * The value of the interest depends upon loanperiod, a request-scoped attribute
+     * when applying for loan.
+     */
+    public static final float INTEREST_ON_LOANPERIOD = 0.3f;
+    
+    /**
+     * The value of the processing fees depends upon loanperiod, a request-scoped attribute
+     * when applying for loan.
+     */
+    public static final float PROCESSING_FEES = 0.001f;
+    
+    /**
+     * The value of the documentation charges depends upon loanperiod, a request-scoped attribute
+     * when applying for loan.
+     */
+    public static final float DOCUMENTATION_CHARGES = 0.5f;    
 }

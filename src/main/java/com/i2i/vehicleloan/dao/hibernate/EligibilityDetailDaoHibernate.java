@@ -1,7 +1,5 @@
 package com.i2i.vehicleloan.dao.hibernate;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.hibernate.HibernateException;
@@ -36,7 +34,7 @@ public class EligibilityDetailDaoHibernate extends GenericDaoHibernate<Eligibili
      * 		Its a object from service method.
      * @return
      * 		Returns true or false to service method.
-     * @throws ApplicationException
+     * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
      */
     public boolean insertEligibilityDetail(EligibilityDetail eligibilityDetail) throws DatabaseException {
@@ -55,12 +53,13 @@ public class EligibilityDetailDaoHibernate extends GenericDaoHibernate<Eligibili
      * 		Its a value from service method.
      * @return
      * 		Returns list of object to service method.
-     * @throws ApplicationException
+     * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application. 
      */
-    public List<EligibilityDetail> retrieveEligibilityDetailsByUserId(int userId) throws DatabaseException {
+    public EligibilityDetail retrieveEligibilityDetailsByUserId(int userId) throws DatabaseException {
         try {
-            List<EligibilityDetail> eligibilityDetails = getSession().createQuery("from EligibilityDetail where user_id="+userId).list();
+            //List<EligibilityDetail> eligibilityDetails = getSession().createQuery("from EligibilityDetail where user_id="+userId).list();
+            EligibilityDetail eligibilityDetails = (EligibilityDetail) getSession().get(EligibilityDetail.class, userId);
             return eligibilityDetails;
         } catch (HibernateException exp) {
             throw new DatabaseException("Error occured in retrieving the eligibility details", exp);
@@ -74,15 +73,15 @@ public class EligibilityDetailDaoHibernate extends GenericDaoHibernate<Eligibili
      *     It is the value from service to to get a specific detail from database.
      * @return
      *     It return a object to service method
-     * @throws ApplicationException
+     * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
      */
     public EligibilityDetail retrieveEligibilityDetail(int vehicleModelId) throws DatabaseException {
         try {
-            EligibilityDetail eligibilityDetail = (EligibilityDetail) getSession().createQuery("from EligibilityDetail where vehicle_model_id = '"+vehicleModelId+"'");
+            EligibilityDetail eligibilityDetail = (EligibilityDetail) getSession().createQuery("from EligibilityDetail where vehicle_model_id = '"+vehicleModelId+"'");            
             return eligibilityDetail;
         } catch (HibernateException exp) {
-            throw new DatabaseException("Error occured in retrive the payment details in payment", exp);
+            throw new DatabaseException("Error occured in retrive the eligibility details in payment", exp);
         }
     }
 }

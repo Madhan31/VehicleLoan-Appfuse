@@ -126,7 +126,7 @@ public class LoanDaoHibernate extends GenericDaoHibernate<Loan, Long> implements
      *     It is the value from service to to get a specific detail from database.
      * @return
      *     It return a object to service method
-     * @throws ApplicationException
+     * @throws DatabaseException
      *     It handle all the custom exception in vehicle loan application.
      */
     public Loan retrieveLoanByEligibilityDetailId(int eligibilityDetailId) throws DatabaseException {

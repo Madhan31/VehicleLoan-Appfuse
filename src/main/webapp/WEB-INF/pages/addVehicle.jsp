@@ -29,7 +29,7 @@
         <li><a href="home">Home</a></li>
         <li class="dropdown" class = "active"><a class="dropdown-toggle"  data-toggle="dropdown" href="#">Vehicle Operation<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Add Vehicle</a></li>
+              <li><a href="">Add Vehicle</a></li>
               <li><a href="deleteVehicle">Delete Vehicle</a></li>
               <li><a href="retrieveAllVehicle">Display All Vehicle</a></li> 
             </ul>
@@ -49,7 +49,7 @@
             </ul>
           </li>
           <li><a href="loanDetail">Loan Payment</a></li>
-        <li><a href="admin">Add Admin</a></li>
+        <li><a href="admin/users">Administrators</a></li>
         <li><a href="usersDetail">Users Detail</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
